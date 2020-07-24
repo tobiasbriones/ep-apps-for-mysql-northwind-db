@@ -9,6 +9,7 @@
 namespace App\Database;
 
 use App\Config\Env;
+use Exception;
 use PDO;
 
 /**
@@ -22,6 +23,7 @@ class Connection {
      * Creates a PDO northwind database connection.
      *
      * @return PDO
+     * @throws Exception if it fails to connect to the database
      */
     public static function newInstance(): PDO {
         $host = Env::get(Env::DB_HOST_KEY);
