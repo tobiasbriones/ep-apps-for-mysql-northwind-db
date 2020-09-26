@@ -7,7 +7,12 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.customer;
 
-// Notice that Customer and Employee and Supplier and Shipper are the exact same model ...
+// Notice that Customer and Employee and Supplier and Shipper are the exact same
+// model ...
+
+/**
+ * Defines a CustomerBuilder pattern for the {@link Customer} model.
+ */
 public final class CustomerBuilder {
 
     private final int id;

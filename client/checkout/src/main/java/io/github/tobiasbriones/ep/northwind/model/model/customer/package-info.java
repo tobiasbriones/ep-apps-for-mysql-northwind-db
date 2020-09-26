@@ -5,4 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/**
+ * Provides the Northwind's Customer Model API.
+ */
+
 package io.github.tobiasbriones.ep.northwind.model.model.customer;

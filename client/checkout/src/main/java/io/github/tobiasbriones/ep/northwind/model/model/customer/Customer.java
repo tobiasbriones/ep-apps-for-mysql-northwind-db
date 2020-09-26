@@ -9,7 +9,12 @@ package io.github.tobiasbriones.ep.northwind.model.model.customer;
 
 import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableModel;
 
-// Notice that Customer and Employee and Supplier and Shipper are the exact same model ...
+// Notice that Customer and Employee and Supplier and Shipper are the exact same
+// model ...
+
+/**
+ * Defines a Customer for the Northwind database model.
+ */
 public final class Customer extends IdentifiableModel {
 
     private final String company;
