@@ -209,26 +209,26 @@ public final class CustomerBuilder {
 
     @Override
     public String toString() {
-        return "CustomerBuilder{" +
-               "id=" + id +
-               ", company='" + company + '\'' +
-               ", lastName='" + lastName + '\'' +
-               ", firstName='" + firstName + '\'' +
-               ", email='" + email + '\'' +
-               ", jobTitle='" + jobTitle + '\'' +
-               ", businessPhone='" + businessPhone + '\'' +
-               ", homePhone='" + homePhone + '\'' +
-               ", mobilePhone='" + mobilePhone + '\'' +
-               ", faxNumber='" + faxNumber + '\'' +
-               ", address='" + address + '\'' +
-               ", city='" + city + '\'' +
-               ", stateProvince='" + stateProvince + '\'' +
-               ", zipPostalCode='" + zipPostalCode + '\'' +
-               ", countryRegion='" + countryRegion + '\'' +
-               ", webPage='" + webPage + '\'' +
-               ", notes='" + notes + '\'' +
-               ", attachments='" + attachments + '\'' +
-               '}';
+        return "CustomerBuilder[" +
+               "id=" + id + ", " +
+               "company=" + company + ", " +
+               "lastName=" + lastName + ", " +
+               "firstName=" + firstName + ", " +
+               "email=" + email + ", " +
+               "jobTitle=" + jobTitle + ", " +
+               "businessPhone=" + businessPhone + ", " +
+               "homePhone=" + homePhone + ", " +
+               "mobilePhone=" + mobilePhone + ", " +
+               "faxNumber=" + faxNumber + ", " +
+               "address=" + address + ", " +
+               "city=" + city + ", " +
+               "stateProvince=" + stateProvince + ", " +
+               "zipPostalCode=" + zipPostalCode + ", " +
+               "countryRegion=" + countryRegion + ", " +
+               "webPage=" + webPage + ", " +
+               "notes=" + notes + ", " +
+               "attachments=" + attachments + ", " +
+               "]";
     }
 
     public Customer build() {

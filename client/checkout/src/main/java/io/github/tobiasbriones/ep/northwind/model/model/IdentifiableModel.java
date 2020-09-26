@@ -21,9 +21,9 @@ public class IdentifiableModel {
 
     @Override
     public String toString() {
-        return "IdentifiableModel{" +
-               "id=" + id +
-               "}";
+        return "IdentifiableModel[" +
+               "id=" + id + ", " +
+               "]";
     }
 
 }

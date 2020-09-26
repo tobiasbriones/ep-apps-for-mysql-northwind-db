@@ -140,25 +140,25 @@ public final class Customer extends IdentifiableModel {
 
     @Override
     public String toString() {
-        return "Customer{" +
-               "company='" + company + '\'' +
-               ", lastName='" + lastName + '\'' +
-               ", firstName='" + firstName + '\'' +
-               ", email='" + email + '\'' +
-               ", jobTitle='" + jobTitle + '\'' +
-               ", businessPhone='" + businessPhone + '\'' +
-               ", homePhone='" + homePhone + '\'' +
-               ", mobilePhone='" + mobilePhone + '\'' +
-               ", faxNumber='" + faxNumber + '\'' +
-               ", address='" + address + '\'' +
-               ", city='" + city + '\'' +
-               ", stateProvince='" + stateProvince + '\'' +
-               ", zipPostalCode='" + zipPostalCode + '\'' +
-               ", countryRegion='" + countryRegion + '\'' +
-               ", webPage='" + webPage + '\'' +
-               ", notes='" + notes + '\'' +
-               ", attachments='" + attachments + '\'' +
-               '}';
+        return "Customer[" +
+               "company=" + company + ", " +
+               "lastName=" + lastName + ", " +
+               "firstName=" + firstName + ", " +
+               "email=" + email + ", " +
+               "jobTitle=" + jobTitle + ", " +
+               "businessPhone=" + businessPhone + ", " +
+               "homePhone=" + homePhone + ", " +
+               "mobilePhone=" + mobilePhone + ", " +
+               "faxNumber=" + faxNumber + ", " +
+               "address=" + address + ", " +
+               "city=" + city + ", " +
+               "stateProvince=" + stateProvince + ", " +
+               "zipPostalCode=" + zipPostalCode + ", " +
+               "countryRegion=" + countryRegion + ", " +
+               "webPage=" + webPage + ", " +
+               "notes=" + notes + ", " +
+               "attachments=" + attachments + ", " +
+               "] " + super.toString();
     }
 
 }
