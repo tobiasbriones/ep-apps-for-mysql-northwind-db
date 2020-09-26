@@ -50,6 +50,10 @@ public final class CustomerBuilder {
         attachments = "";
     }
 
+    //                                                                        //
+    //                      ACCESSOR AND MUTATOR METHODS                      //
+    //                                                                        //
+
     public int getId() {
         return id;
     }
@@ -206,6 +210,7 @@ public final class CustomerBuilder {
         attachments = value;
         return this;
     }
+    //                  END OF ACCESSOR AND MUTATOR METHODS                   //
 
     @Override
     public String toString() {
