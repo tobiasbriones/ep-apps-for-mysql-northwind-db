@@ -5,4 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/**
+ * Provides the Northwind model's model API layer to access the business
+ * core logic.
+ */
+
 package io.github.tobiasbriones.ep.northwind.model.model;
