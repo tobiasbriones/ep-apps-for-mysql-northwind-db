@@ -31,7 +31,7 @@ public final class ProductBuilder {
         description = "";
         standardCost = 0.0d;
         listPrice = 0.0d;
-        reorderLevel =  0;
+        reorderLevel = 0;
         targetLevel = 0;
         quantityPerUnit = "";
         discontinued = false;
@@ -166,6 +166,26 @@ public final class ProductBuilder {
         return this;
     }
     //                  END OF ACCESSOR AND MUTATOR METHODS                   //
+
+    @Override
+    public String toString() {
+        return "ProductBuilder[" +
+               "id=" + id + ", " +
+               "code=" + code + ", " +
+               "name=" + name + ", " +
+               "description=" + description + ", " +
+               "standardCost=" + standardCost + ", " +
+               "listPrice=" + listPrice + ", " +
+               "reorderLevel=" + reorderLevel + ", " +
+               "targetLevel=" + targetLevel + ", " +
+               "quantityPerUnit=" + quantityPerUnit + ", " +
+               "discontinued=" + discontinued + ", " +
+               "minimumReorderQuantity=" + minimumReorderQuantity + ", " +
+               "category=" + category + ", " +
+               "attachments=" + attachments + ", " +
+               "supplierIds=" + supplierIds + ", " +
+               "]";
+    }
 
     public Product build() {
         return new Product(
