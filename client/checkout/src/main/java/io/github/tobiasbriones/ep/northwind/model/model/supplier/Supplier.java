@@ -9,6 +9,8 @@ package io.github.tobiasbriones.ep.northwind.model.model.supplier;
 
 import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableModel;
 
+import java.util.Objects;
+
 // Notice that Customer and Employee and Supplier and Shipper are the exact same
 // model ...
 
@@ -144,6 +146,43 @@ public final class Supplier extends IdentifiableModel {
     }
 
     @Override
+    public int hashCode() {
+        //noinspection ObjectInstantiationInEqualsHashCode
+        return Objects.hash(
+            getId(),
+            company,
+            lastName,
+            firstName,
+            email,
+            jobTitle,
+            businessPhone,
+            homePhone,
+            mobilePhone,
+            faxNumber,
+            address,
+            city,
+            stateProvince,
+            zipPostalCode,
+            countryRegion,
+            webPage,
+            notes,
+            attachments
+        );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final Supplier supplier = (Supplier) obj;
+        return isEqualsTo(supplier);
+    }
+
+    @Override
     public String toString() {
         return "Customer[" +
                "company=" + company + ", " +
@@ -164,6 +203,40 @@ public final class Supplier extends IdentifiableModel {
                "notes=" + notes + ", " +
                "attachments=" + attachments + ", " +
                "] " + super.toString();
+    }
+
+    private boolean checkEqualsPart1(Supplier supplier) {
+        return Objects.equals(company, supplier.getCompany()) &&
+               Objects.equals(lastName, supplier.getLastName()) &&
+               Objects.equals(firstName, supplier.getFirstName()) &&
+               Objects.equals(email, supplier.getEmail());
+    }
+
+    private boolean checkEqualsPart2(Supplier supplier) {
+        return Objects.equals(jobTitle, supplier.getJobTitle()) &&
+               Objects.equals(businessPhone, supplier.getBusinessPhone()) &&
+               Objects.equals(homePhone, supplier.getHomePhone()) &&
+               Objects.equals(mobilePhone, supplier.getMobilePhone()) &&
+               Objects.equals(faxNumber, supplier.getFaxNumber());
+    }
+
+    private boolean checkEqualsPart3(Supplier supplier) {
+        return Objects.equals(address, supplier.getAddress()) &&
+               Objects.equals(city, supplier.getCity()) &&
+               Objects.equals(stateProvince, supplier.getStateProvince()) &&
+               Objects.equals(zipPostalCode, supplier.getZipPostalCode()) &&
+               Objects.equals(countryRegion, supplier.getCountryRegion()) &&
+               Objects.equals(webPage, supplier.getWebPage()) &&
+               Objects.equals(notes, supplier.getNotes()) &&
+               Objects.equals(attachments, supplier.getAttachments());
+    }
+
+    private boolean isEqualsTo(Supplier supplier) {
+        // Create several methods for reducing the cyclomatic complexity
+        return getId() == supplier.getId() &&
+               checkEqualsPart1(supplier) &&
+               checkEqualsPart2(supplier) &&
+               checkEqualsPart3(supplier);
     }
 
 }

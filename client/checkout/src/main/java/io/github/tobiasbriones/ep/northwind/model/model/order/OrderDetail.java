@@ -113,8 +113,8 @@ public final class OrderDetail extends IdentifiableModel {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final OrderDetail other = (OrderDetail) obj;
-        return isEqualsTo(other);
+        final OrderDetail orderDetail = (OrderDetail) obj;
+        return isEqualsTo(orderDetail);
     }
 
     @Override
