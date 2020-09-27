@@ -141,4 +141,19 @@ public final class OrderDetailBuilder {
                "]";
     }
 
+    public OrderDetail build() {
+        return new OrderDetail(
+            id,
+            order,
+            product,
+            status,
+            quantity,
+            unitPrice,
+            discount,
+            dateAllocated,
+            purchaseOrderId,
+            inventoryId
+        );
+    }
+
 }
