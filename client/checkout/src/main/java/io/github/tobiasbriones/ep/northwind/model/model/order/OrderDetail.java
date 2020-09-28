@@ -7,7 +7,7 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.order;
 
-import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableModel;
+import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableRecord;
 import io.github.tobiasbriones.ep.northwind.model.model.product.Product;
 
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ import java.util.Objects;
 /**
  * Defines an OrderDetail for the Northwind's database model.
  */
-public final class OrderDetail extends IdentifiableModel {
+public final class OrderDetail extends IdentifiableRecord {
 
     private final Order order;
     private final Product product;

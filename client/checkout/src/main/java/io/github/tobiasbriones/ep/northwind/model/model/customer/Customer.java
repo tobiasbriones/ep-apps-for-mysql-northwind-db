@@ -7,7 +7,7 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.customer;
 
-import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableModel;
+import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableRecord;
 
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * Defines a Customer for the Northwind database model.
  */
-public final class Customer extends IdentifiableModel {
+public final class Customer extends IdentifiableRecord {
 
     private final String company;
     private final String lastName;

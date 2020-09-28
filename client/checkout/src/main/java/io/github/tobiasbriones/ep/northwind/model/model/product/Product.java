@@ -7,9 +7,9 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.product;
 
-import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableModel;
+import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableRecord;
 
-public final class Product extends IdentifiableModel {
+public final class Product extends IdentifiableRecord {
 
     private final String code;
     private final String name;

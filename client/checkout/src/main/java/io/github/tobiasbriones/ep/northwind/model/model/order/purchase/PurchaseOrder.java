@@ -7,7 +7,7 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.order.purchase;
 
-import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableModel;
+import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableRecord;
 import io.github.tobiasbriones.ep.northwind.model.model.employee.Employee;
 import io.github.tobiasbriones.ep.northwind.model.model.supplier.Supplier;
 
@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * Defines a PurchaseOrder for the Northwind's database model.
  */
-public final class PurchaseOrder extends IdentifiableModel {
+public final class PurchaseOrder extends IdentifiableRecord {
 
     private final Supplier supplier;
     private final Employee createdBy;

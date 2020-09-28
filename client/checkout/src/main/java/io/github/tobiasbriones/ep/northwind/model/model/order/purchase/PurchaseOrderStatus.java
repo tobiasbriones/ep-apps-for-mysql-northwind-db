@@ -7,11 +7,11 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.order.purchase;
 
-import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableModel;
+import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableRecord;
 
 import java.util.Objects;
 
-public final class PurchaseOrderStatus extends IdentifiableModel {
+public final class PurchaseOrderStatus extends IdentifiableRecord {
 
     private final String status;
 

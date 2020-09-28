@@ -7,7 +7,7 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.order;
 
-import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableModel;
+import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableRecord;
 import io.github.tobiasbriones.ep.northwind.model.model.customer.Customer;
 import io.github.tobiasbriones.ep.northwind.model.model.employee.Employee;
 import io.github.tobiasbriones.ep.northwind.model.model.shipper.Shipper;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 /**
  * Defines an Order for the Northwind's database model.
  */
-public final class Order extends IdentifiableModel {
+public final class Order extends IdentifiableRecord {
 
     private final Employee employee;
     private final Customer customer;

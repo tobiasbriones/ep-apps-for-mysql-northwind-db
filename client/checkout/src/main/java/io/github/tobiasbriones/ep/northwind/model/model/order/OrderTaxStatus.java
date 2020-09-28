@@ -7,14 +7,14 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.order;
 
-import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableModel;
+import io.github.tobiasbriones.ep.northwind.model.model.IdentifiableRecord;
 
 import java.util.Objects;
 
 /**
  * Defines an OrderTaxStatus for the Northwind's database model.
  */
-public final class OrderTaxStatus extends IdentifiableModel {
+public final class OrderTaxStatus extends IdentifiableRecord {
 
     private final String name;
 
