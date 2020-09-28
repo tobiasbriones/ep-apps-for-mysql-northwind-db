@@ -12,11 +12,35 @@ package io.github.tobiasbriones.ep.northwind.model.model;
  */
 public class IdentifiableRecord {
 
+    //                                                                        //
+    //                                                                        //
+    //                                 CLASS                                  //
+    //                                                                        //
+    //                                                                        //
+
     /**
      * Defines a constant for the id to assign to new records which don't have a
      * given id by the system (database) yet.
      */
     public static final int NEW_RECORD_DEF_ID = -1;
+
+    /**
+     * Returns {@code true} if and only if the given id is valid.
+     *
+     * @param id id to validate
+     *
+     * @return {@code true} if and only if the given id is valid
+     */
+    public static final boolean isValidId(int id) {
+        return id >= 0 || id == NEW_RECORD_DEF_ID;
+    }
+
+    //                                                                        //
+    //                                                                        //
+    //                                INSTANCE                                //
+    //                                                                        //
+    //                                                                        //
+
     private final int id;
 
     /**
@@ -29,7 +53,7 @@ public class IdentifiableRecord {
      * @throws RuntimeException if the id value is invalid
      */
     public IdentifiableRecord(int id) {
-        if (id < 0 && id != NEW_RECORD_DEF_ID) {
+        if (!isValidId(id)) {
             final var msg = "The id must be a non-negative integer";
             throw new RuntimeException(msg);
         }
