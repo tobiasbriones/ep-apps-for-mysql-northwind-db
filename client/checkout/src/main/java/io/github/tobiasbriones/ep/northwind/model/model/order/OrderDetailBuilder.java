@@ -7,6 +7,7 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.order;
 
+import io.github.tobiasbriones.ep.northwind.model.model.AbstractBuilder;
 import io.github.tobiasbriones.ep.northwind.model.model.product.Product;
 
 import java.time.LocalDate;
@@ -14,9 +15,8 @@ import java.time.LocalDate;
 /**
  * Defines an OrderDetailBuilder pattern for the {@link OrderDetail} model.
  */
-public final class OrderDetailBuilder {
+public final class OrderDetailBuilder extends AbstractBuilder<OrderDetail> {
 
-    private final int id;
     private Order order;
     private Product product;
     private OrderDetailStatus status;
@@ -28,7 +28,7 @@ public final class OrderDetailBuilder {
     private int inventoryId;
 
     public OrderDetailBuilder(int id) {
-        this.id = id;
+        super(id);
         this.order = null;
         this.product = null;
         this.status = null;
@@ -38,10 +38,6 @@ public final class OrderDetailBuilder {
         this.dateAllocated = null;
         this.purchaseOrderId = 0;
         this.inventoryId = 0;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public Order getOrder() {
@@ -128,7 +124,6 @@ public final class OrderDetailBuilder {
     @Override
     public String toString() {
         return "OrderDetailBuilder[" +
-               "id=" + id + ", " +
                "order=" + order + ", " +
                "product=" + product + ", " +
                "status=" + status + ", " +
@@ -138,12 +133,13 @@ public final class OrderDetailBuilder {
                "dateAllocated=" + dateAllocated + ", " +
                "purchaseOrderId=" + purchaseOrderId + ", " +
                "inventoryId=" + inventoryId + ", " +
-               "]";
+               "] " + super.toString();
     }
 
+    @Override
     public OrderDetail build() {
         return new OrderDetail(
-            id,
+            getId(),
             order,
             product,
             status,

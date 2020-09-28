@@ -10,12 +10,13 @@ package io.github.tobiasbriones.ep.northwind.model.model.shipper;
 // Notice that Customer and Employee and Supplier and Shipper are the exact same
 // model ...
 
+import io.github.tobiasbriones.ep.northwind.model.model.AbstractBuilder;
+
 /**
  * Defines a ShipperBuilder pattern for the {@link Shipper} model.
  */
-public final class ShipperBuilder {
+public final class ShipperBuilder extends AbstractBuilder<Shipper> {
 
-    private final int id;
     private String company;
     private String lastName;
     private String firstName;
@@ -35,7 +36,7 @@ public final class ShipperBuilder {
     private String attachments;
 
     public ShipperBuilder(int id) {
-        this.id = id;
+        super(id);
         company = "";
         lastName = "";
         firstName = "";
@@ -58,10 +59,6 @@ public final class ShipperBuilder {
     //                                                                        //
     //                      ACCESSOR AND MUTATOR METHODS                      //
     //                                                                        //
-
-    public int getId() {
-        return id;
-    }
 
     public String getCompany() {
         return company;
@@ -215,12 +212,12 @@ public final class ShipperBuilder {
         attachments = value;
         return this;
     }
+
     //                  END OF ACCESSOR AND MUTATOR METHODS                   //
 
     @Override
     public String toString() {
         return "ShipperBuilder[" +
-               "id=" + id + ", " +
                "company=" + company + ", " +
                "lastName=" + lastName + ", " +
                "firstName=" + firstName + ", " +
@@ -238,12 +235,13 @@ public final class ShipperBuilder {
                "webPage=" + webPage + ", " +
                "notes=" + notes + ", " +
                "attachments=" + attachments + ", " +
-               "]";
+               "] " + super.toString();
     }
 
+    @Override
     public Shipper build() {
         return new Shipper(
-            id,
+            getId(),
             company,
             lastName,
             firstName,

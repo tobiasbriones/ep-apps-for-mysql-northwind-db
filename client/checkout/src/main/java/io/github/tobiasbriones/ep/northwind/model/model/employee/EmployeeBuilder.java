@@ -10,12 +10,13 @@ package io.github.tobiasbriones.ep.northwind.model.model.employee;
 // Notice that Customer and Employee and Supplier and Shipper are the exact same
 // model ...
 
+import io.github.tobiasbriones.ep.northwind.model.model.AbstractBuilder;
+
 /**
  * Defines an EmployeeBuilder pattern for the {@link Employee} model.
  */
-public final class EmployeeBuilder {
+public final class EmployeeBuilder extends AbstractBuilder<Employee> {
 
-    private final int id;
     private String company;
     private String lastName;
     private String firstName;
@@ -35,7 +36,7 @@ public final class EmployeeBuilder {
     private String attachments;
 
     public EmployeeBuilder(int id) {
-        this.id = id;
+        super(id);
         company = "";
         lastName = "";
         firstName = "";
@@ -58,10 +59,6 @@ public final class EmployeeBuilder {
     //                                                                        //
     //                      ACCESSOR AND MUTATOR METHODS                      //
     //                                                                        //
-
-    public int getId() {
-        return id;
-    }
 
     public String getCompany() {
         return company;
@@ -220,7 +217,6 @@ public final class EmployeeBuilder {
     @Override
     public String toString() {
         return "EmployeeBuilder[" +
-               "id=" + id + ", " +
                "company=" + company + ", " +
                "lastName=" + lastName + ", " +
                "firstName=" + firstName + ", " +
@@ -238,12 +234,13 @@ public final class EmployeeBuilder {
                "webPage=" + webPage + ", " +
                "notes=" + notes + ", " +
                "attachments=" + attachments + ", " +
-               "]";
+               "] " + super.toString();
     }
 
+    @Override
     public Employee build() {
         return new Employee(
-            id,
+            getId(),
             company,
             lastName,
             firstName,

@@ -7,9 +7,10 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.product;
 
-public final class ProductBuilder {
+import io.github.tobiasbriones.ep.northwind.model.model.AbstractBuilder;
 
-    private final int id;
+public final class ProductBuilder extends AbstractBuilder<Product> {
+
     private String code;
     private String name;
     private String description;
@@ -25,7 +26,7 @@ public final class ProductBuilder {
     private String supplierIds;
 
     public ProductBuilder(int id) {
-        this.id = id;
+        super(id);
         code = "";
         name = "";
         description = "";
@@ -44,10 +45,6 @@ public final class ProductBuilder {
     //                                                                        //
     //                      ACCESSOR AND MUTATOR METHODS                      //
     //                                                                        //
-
-    public int getId() {
-        return id;
-    }
 
     public String getCode() {
         return code;
@@ -170,7 +167,6 @@ public final class ProductBuilder {
     @Override
     public String toString() {
         return "ProductBuilder[" +
-               "id=" + id + ", " +
                "code=" + code + ", " +
                "name=" + name + ", " +
                "description=" + description + ", " +
@@ -184,12 +180,13 @@ public final class ProductBuilder {
                "category=" + category + ", " +
                "attachments=" + attachments + ", " +
                "supplierIds=" + supplierIds + ", " +
-               "]";
+               "] " + super.toString();
     }
 
+    @Override
     public Product build() {
         return new Product(
-            id,
+            getId(),
             code,
             name,
             description,

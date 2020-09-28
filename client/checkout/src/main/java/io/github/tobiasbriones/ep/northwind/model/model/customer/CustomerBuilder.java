@@ -10,12 +10,13 @@ package io.github.tobiasbriones.ep.northwind.model.model.customer;
 // Notice that Customer and Employee and Supplier and Shipper are the exact same
 // model ...
 
+import io.github.tobiasbriones.ep.northwind.model.model.AbstractBuilder;
+
 /**
  * Defines a CustomerBuilder pattern for the {@link Customer} model.
  */
-public final class CustomerBuilder {
+public final class CustomerBuilder extends AbstractBuilder<Customer> {
 
-    private final int id;
     private String company;
     private String lastName;
     private String firstName;
@@ -35,7 +36,7 @@ public final class CustomerBuilder {
     private String attachments;
 
     public CustomerBuilder(int id) {
-        this.id = id;
+        super(id);
         company = "";
         lastName = "";
         firstName = "";
@@ -58,10 +59,6 @@ public final class CustomerBuilder {
     //                                                                        //
     //                      ACCESSOR AND MUTATOR METHODS                      //
     //                                                                        //
-
-    public int getId() {
-        return id;
-    }
 
     public String getCompany() {
         return company;
@@ -220,7 +217,6 @@ public final class CustomerBuilder {
     @Override
     public String toString() {
         return "CustomerBuilder[" +
-               "id=" + id + ", " +
                "company=" + company + ", " +
                "lastName=" + lastName + ", " +
                "firstName=" + firstName + ", " +
@@ -238,12 +234,13 @@ public final class CustomerBuilder {
                "webPage=" + webPage + ", " +
                "notes=" + notes + ", " +
                "attachments=" + attachments + ", " +
-               "]";
+               "] " + super.toString();
     }
 
+    @Override
     public Customer build() {
         return new Customer(
-            id,
+            getId(),
             company,
             lastName,
             firstName,

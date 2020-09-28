@@ -7,6 +7,7 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.order.purchase;
 
+import io.github.tobiasbriones.ep.northwind.model.model.AbstractBuilder;
 import io.github.tobiasbriones.ep.northwind.model.model.employee.Employee;
 import io.github.tobiasbriones.ep.northwind.model.model.supplier.Supplier;
 
@@ -15,9 +16,8 @@ import java.time.LocalDate;
 /**
  * Defines a PurchaseOrderBuilder for the {@link PurchaseOrder} model.
  */
-public final class PurchaseOrderBuilder {
+public final class PurchaseOrderBuilder extends AbstractBuilder<PurchaseOrder> {
 
-    private final int id;
     private Supplier supplier;
     private Employee createdBy;
     private PurchaseOrderStatus status;
@@ -35,7 +35,7 @@ public final class PurchaseOrderBuilder {
     private int submittedBy;
 
     public PurchaseOrderBuilder(int id) {
-        this.id = id;
+        super(id);
         this.supplier = null;
         this.createdBy = null;
         this.status = null;
@@ -56,10 +56,6 @@ public final class PurchaseOrderBuilder {
     //                                                                        //
     //                      ACCESSOR AND MUTATOR METHODS                      //
     //                                                                        //
-
-    public int getId() {
-        return id;
-    }
 
     public Supplier getSupplier() {
         return supplier;
@@ -200,7 +196,6 @@ public final class PurchaseOrderBuilder {
     @Override
     public String toString() {
         return "PurchaseOrderBuilder[" +
-               "id=" + id + ", " +
                "supplier=" + supplier + ", " +
                "createdBy=" + createdBy + ", " +
                "status=" + status + ", " +
@@ -216,12 +211,13 @@ public final class PurchaseOrderBuilder {
                "approvedBy=" + approvedBy + ", " +
                "approveDate=" + approveDate + ", " +
                "submittedBy=" + submittedBy + ", " +
-               "]";
+               "] " + super.toString();
     }
 
+    @Override
     public PurchaseOrder build() {
         return new PurchaseOrder(
-            id,
+            getId(),
             supplier,
             createdBy,
             status,

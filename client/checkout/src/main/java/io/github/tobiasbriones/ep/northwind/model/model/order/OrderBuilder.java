@@ -7,6 +7,7 @@
 
 package io.github.tobiasbriones.ep.northwind.model.model.order;
 
+import io.github.tobiasbriones.ep.northwind.model.model.AbstractBuilder;
 import io.github.tobiasbriones.ep.northwind.model.model.customer.Customer;
 import io.github.tobiasbriones.ep.northwind.model.model.employee.Employee;
 import io.github.tobiasbriones.ep.northwind.model.model.shipper.Shipper;
@@ -16,9 +17,8 @@ import java.time.LocalDateTime;
 /**
  * Defines an OrderBuilder pattern for the {@link Order} model.
  */
-public final class OrderBuilder {
+public final class OrderBuilder extends AbstractBuilder<Order> {
 
-    private final int id;
     private Employee employee;
     private Customer customer;
     private Shipper shipper;
@@ -44,7 +44,7 @@ public final class OrderBuilder {
          * too much overhead for now and the given database is poorly
          * designed to bring a more realistic business model
          */
-        this.id = id;
+        super(id);
         this.employee = null;
         this.customer = null;
         this.shipper = null;
@@ -69,10 +69,6 @@ public final class OrderBuilder {
     //                                                                        //
     //                      ACCESSOR AND MUTATOR METHODS                      //
     //                                                                        //
-
-    public int getId() {
-        return id;
-    }
 
     public Employee getEmployee() {
         return employee;
@@ -249,7 +245,6 @@ public final class OrderBuilder {
     @Override
     public String toString() {
         return "OrderBuilder[" +
-               "id=" + id + ", " +
                "employee=" + employee + ", " +
                "customer=" + customer + ", " +
                "shipper=" + shipper + ", " +
@@ -269,12 +264,13 @@ public final class OrderBuilder {
                "paidDate=" + paidDate + ", " +
                "notes=" + notes + ", " +
                "taxRate=" + taxRate + ", " +
-               "]";
+               "] " + super.toString();
     }
 
+    @Override
     public Order build() {
         return new Order(
-            id,
+            getId(),
             employee,
             customer,
             shipper,
