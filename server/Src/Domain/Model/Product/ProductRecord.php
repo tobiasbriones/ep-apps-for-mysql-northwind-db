@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Domain\Model\Product;
+namespace App\Database\Relation\Product;
 
 use JsonSerializable;
 
@@ -17,7 +17,6 @@ use JsonSerializable;
  */
 class ProductRecord implements Product, JsonSerializable {
 
-    private int $id;
     private string $supplierIds;
     private string $code;
     private string $name;
@@ -32,7 +31,6 @@ class ProductRecord implements Product, JsonSerializable {
     private string $category;
 
     public function __construct(
-        int $id,
         string $supplierIds,
         string $code,
         string $name,
@@ -46,7 +44,6 @@ class ProductRecord implements Product, JsonSerializable {
         int $minimumReorderQuantity,
         string $category
     ) {
-        $this->id = $id;
         $this->supplierIds = $supplierIds;
         $this->code = $code;
         $this->name = $name;
@@ -59,10 +56,6 @@ class ProductRecord implements Product, JsonSerializable {
         $this->discontinued = $discontinued;
         $this->minimumReorderQuantity = $minimumReorderQuantity;
         $this->category = $category;
-    }
-
-    public function id(): int {
-        return $this->id;
     }
 
     public function supplierIds(): string {
@@ -115,7 +108,6 @@ class ProductRecord implements Product, JsonSerializable {
 
     public function jsonSerialize(): array {
         return [
-            "id" => $this->id,
             "supplierIds" => $this->supplierIds,
             "code" => $this->code,
             "name" => $this->name,

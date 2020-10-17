@@ -6,16 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Domain\Model\Product;
-
-use App\Domain\Model\Identifiable;
+namespace App\Database\Relation\Product;
 
 /**
  * Defines the Product model from the Northwind Database Schema.
  *
  * @package App\Domain\Model\Product
  */
-interface Product extends Identifiable {
+interface Product {
 
     public function supplierIds(): string;
 

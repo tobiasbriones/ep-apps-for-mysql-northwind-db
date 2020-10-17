@@ -6,17 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Domain\Model\Product;
-
-use App\Domain\Model\IdentifiableAccessor;
+namespace App\Database\Relation\Product;
 
 /**
  * Defines the Product Accessor from the Product model.
  *
  * @package App\Domain\Model\Product
- * @see Product
+ * @see     Product
  */
-interface ProductAccessor extends IdentifiableAccessor {
+interface ProductAccessor {
 
     public function getSupplierIds(): string;
 

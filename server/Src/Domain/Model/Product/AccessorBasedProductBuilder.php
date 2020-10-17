@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Domain\Model\Product;
+namespace App\Database\Relation\Product;
 
 use Exception;
 
@@ -37,7 +37,6 @@ class AccessorBasedProductBuilder {
             throw new Exception($msg);
         }
         return new ProductRecord(
-            $this->accessor->getId(),
             $this->accessor->getSupplierIds(),
             $this->accessor->getCode(),
             $this->accessor->getName(),
