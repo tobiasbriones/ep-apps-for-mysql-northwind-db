@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Database\Relation\Product;
+namespace App\Domain\Model\Product;
 
 /**
  * Defines the Product Accessor from the Product model.
