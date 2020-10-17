@@ -13,30 +13,4 @@ namespace App\Domain\Model\Product;
  *
  * @package App\Domain\Model\Product
  */
-interface Product {
-
-    public function supplierIds(): string;
-
-    public function code(): string;
-
-    public function name(): string;
-
-    public function description(): ?string;
-
-    public function standardCost(): float;
-
-    public function listPrice(): float;
-
-    public function reorderLevel(): int;
-
-    public function targetLevel(): int;
-
-    public function quantityPerUnit(): string;
-
-    public function discontinued(): bool;
-
-    public function minimumReorderQuantity(): int;
-
-    public function category(): string;
-
-}
+interface Product extends ProductAttributes {}
