@@ -10,17 +10,16 @@ namespace App\Database\Relation;
 
 /**
  * Defines an Identifiable entity which is identified by its integer id. The id
- * is a non-negative integer number. This interface is
- * realized by an entity.
+ * is a non-negative integer number. This interface is realized by an entity.
  *
- * @package App\Domain\Model
+ * @package App\Database\Relation
  */
 interface Identifiable {
 
     /**
      * Returns the entity's id. The id is a non-negative integer number.
      *
-     * @return int the record's id
+     * @return int the entity's id
      */
     public function id(): int;
 
