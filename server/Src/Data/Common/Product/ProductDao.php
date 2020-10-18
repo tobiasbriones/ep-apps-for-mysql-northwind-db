@@ -14,7 +14,7 @@ use App\Domain\Model\Product\Product;
 /**
  * Defines the Product DAO.
  *
- * @package App\Database\Relation\Product
+ * @package App\Data\Common\Product
  */
 interface ProductDao {
 
