@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Data\Relational\Relation\Product;
+namespace App\Data\RelationalModel\Relation\Product;
 
-use App\Data\Relational\Relation\Identifiable;
+use App\Data\RelationalModel\Relation\Identifiable;
 use App\Domain\Model\Product\ProductAttributes;
 
 /**
  * Defines the Product Tuple from the product relation.
  *
- * @package App\Database\Relation\Product
+ * @package App\Data\RelationalModel\Relation\Product
  */
 interface ProductTuple extends Identifiable, ProductAttributes {}

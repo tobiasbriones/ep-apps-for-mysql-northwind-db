@@ -6,13 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Data\Relational\Relation;
+namespace App\Data\RelationalModel\Relation;
 
 /**
  * Defines an Identifiable entity which is identified by its integer id. The id
  * is a non-negative integer number. This interface is realized by an entity.
  *
- * @package App\Database\Relation
+ * @package App\Data\RelationalModel\Relation
  */
 interface Identifiable {
 
