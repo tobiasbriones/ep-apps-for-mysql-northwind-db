@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Database\Relation\Product;
+namespace App\Data\Relational\Relation\Product;
 
 use App\Domain\Model\Product\Product;
 

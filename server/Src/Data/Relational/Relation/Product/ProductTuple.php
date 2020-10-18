@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Database\Relation\Product;
+namespace App\Data\Relational\Relation\Product;
 
-use App\Database\Relation\Identifiable;
+use App\Data\Relational\Relation\Identifiable;
 use App\Domain\Model\Product\ProductAttributes;
 
 /**

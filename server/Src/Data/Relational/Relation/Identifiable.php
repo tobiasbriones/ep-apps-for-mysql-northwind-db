@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Database\Relation;
+namespace App\Data\Relational\Relation;
 
 /**
  * Defines an Identifiable entity which is identified by its integer id. The id
