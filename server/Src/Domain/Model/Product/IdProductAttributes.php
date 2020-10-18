@@ -13,7 +13,7 @@ namespace App\Domain\Model\Product;
  *
  * @package App\Domain\Model\Product
  */
-interface IdentifiableProductAttributes {
+interface IdProductAttributes {
 
     public function code(): string;
 

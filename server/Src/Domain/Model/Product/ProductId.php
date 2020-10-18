@@ -8,7 +8,7 @@
 
 namespace App\Domain\Model\Product;
 
-class ProductId implements IdentifiableProductAttributes {
+class ProductId implements IdProductAttributes {
 
     private string $code;
 

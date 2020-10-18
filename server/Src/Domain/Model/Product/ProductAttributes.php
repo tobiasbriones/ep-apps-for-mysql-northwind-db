@@ -13,7 +13,7 @@ namespace App\Domain\Model\Product;
  *
  * @package App\Domain\Model\Product
  */
-interface ProductAttributes extends IdentifiableProductAttributes {
+interface ProductAttributes extends IdProductAttributes {
 
     public function supplierIds(): string;
 
