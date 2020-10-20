@@ -18,6 +18,10 @@ use Exception;
  * programming language, the implementation may vary; and doing this in a
  * scripting language like PHP is overkill and unnecessary.
  *
+ * This class won't be used in this project, it's just to give the idea of
+ * specifying the model attribute names and use any required format style on
+ * them.
+ *
  * @package App\Domain\Model
  */
 class AttributeName {
