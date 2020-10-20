@@ -8,14 +8,12 @@
 
 namespace App\Domain\Model\Product;
 
-use JsonSerializable;
-
 /**
  * Provides the implementation of the Product model.
  *
  * @package App\Domain\Model\Product
  */
-class ProductRecord implements Product, JsonSerializable {
+class ProductRecord implements Product {
 
     private string $supplierIds;
     private string $code;
@@ -104,23 +102,6 @@ class ProductRecord implements Product, JsonSerializable {
 
     public function category(): string {
         return $this->category;
-    }
-
-    public function jsonSerialize(): array {
-        return [
-            "supplierIds" => $this->supplierIds,
-            "code" => $this->code,
-            "name" => $this->name,
-            "description" => $this->description,
-            "standardCost" => $this->standardCost,
-            "listPrice" => $this->listPrice,
-            "reorderLevel" => $this->reorderLevel,
-            "targetLevel" => $this->targetLevel,
-            "quantityPerUnit" => $this->quantityPerUnit,
-            "discontinued" => $this->discontinued,
-            "minimumReorderQuantity" => $this->minimumReorderQuantity,
-            "category" => $this->category
-        ];
     }
 
 }
