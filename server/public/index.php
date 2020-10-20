@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-use App\Api\V1\Products\ProductsController;
+use App\Http\Api\V1\Products\ProductsController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -15,17 +15,10 @@ require __DIR__ . "/../vendor/autoload.php";
 
 $app = AppFactory::create();
 
-// Check a DB connection for "/"
 $app->get(
     "/",
     function (Request $request, Response $response, $args) {
-        try {
-            \App\Database\Connection::newInstance();
-            $response->getBody()->write("Connected to the database successfully!");
-        }
-        catch (Exception $err) {
-            $response->getBody()->write("Fail to connect. $err");
-        }
+        $response->getBody()->write("Hey!");
         return $response;
     }
 );
