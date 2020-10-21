@@ -8,7 +8,7 @@
 
 namespace App\Data\RelationalModel\Relation\Product;
 
-use App\Data\RelationalModel\Relation\Identifiable;
+use App\Data\RelationalModel\Relation\PkIdTupleAttribute;
 use App\Domain\Model\Product\ProductAttributes;
 
 /**
@@ -16,4 +16,4 @@ use App\Domain\Model\Product\ProductAttributes;
  *
  * @package App\Data\RelationalModel\Relation\Product
  */
-interface ProductTuple extends Identifiable, ProductAttributes {}
+interface ProductTuple extends PkIdTupleAttribute, ProductAttributes {}
