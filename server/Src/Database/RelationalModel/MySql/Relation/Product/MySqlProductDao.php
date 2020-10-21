@@ -45,9 +45,9 @@ class MySqlProductDao extends BaseDao implements ProductDao {
     }
 
     private static function bindAllParams(Product $product, PDOStatement $ps): void {
-        $code = $product->code();
+        $code = $product->productCode();
         $supplierIds = $product->supplierIds();
-        $name = $product->name();
+        $name = $product->productName();
         $description = $product->description();
         $standardCost = $product->standardCost();
         $listPrice = $product->listPrice();
@@ -80,7 +80,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
      */
     public function fetch(IdProductAttributes $id): ?Product {
         $conn = $this->getConnection();
-        $code = $id->code();
+        $code = $id->productCode();
         $ps = $conn->prepare(MySqlProductRelationSql::FETCH_PRODUCT_SQL);
 
         $ps->bindParam(ProductTuple::CODE_ATTR_NAME, $code);
@@ -124,7 +124,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
      */
     public function delete(Product $product): void {
         $conn = $this->getConnection();
-        $code = $product->code();
+        $code = $product->productCode();
         $ps = $conn->prepare(MySqlProductRelationSql::DELETE_PRODUCT_SQL);
 
         $ps->bindParam(ProductTuple::CODE_ATTR_NAME, $code);

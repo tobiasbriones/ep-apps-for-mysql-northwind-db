@@ -20,9 +20,9 @@ class MySqlProductRelationSql {
      *
      * Params to bind:
      *
-     * - <strong>code:</strong> product code
+     * - <strong>product_code:</strong> product code
      * - <strong>supplier_ids:</strong> product supplier ids
-     * - <strong>name:</strong> product name
+     * - <strong>product_name:</strong> product name
      * - <strong>description:</strong> product description
      * - <strong>standard_cost:</strong> product standard cost
      * - <strong>list_price:</strong> product list price
@@ -36,9 +36,9 @@ class MySqlProductRelationSql {
     public const CREATE_PRODUCT_SQL = <<<EOT
         INSERT INTO products
         VALUES (
-            :code
+            :product_code
             :supplier_ids, 
-            :name, 
+            :product_name, 
             :description,
             :standard_cost,
             :list_price,
@@ -56,12 +56,12 @@ class MySqlProductRelationSql {
      *
      * Params to bind:
      *
-     * - <strong>code:</strong> product code
+     * - <strong>product_code:</strong> product code
      */
     public const FETCH_PRODUCT_SQL = <<<EOT
-        SELECT code, 
+        SELECT product_code, 
                supplier_ids, 
-               name, 
+               product_name, 
                description,
                standard_cost,
                list_price,
@@ -71,7 +71,7 @@ class MySqlProductRelationSql {
                discontinued,
                minimum_reorder_quantity,
                category
-        FROM products WHERE code = :code
+        FROM products WHERE product_code = :product_code
         EOT;
 
     /**
@@ -85,7 +85,7 @@ class MySqlProductRelationSql {
      * Params to bind:
      *
      * - <strong>supplier_ids:</strong> product supplier ids
-     * - <strong>name:</strong> product name
+     * - <strong>product_name:</strong> product name
      * - <strong>description:</strong> product description
      * - <strong>standard_cost:</strong> product standard cost
      * - <strong>list_price:</strong> product list price
@@ -95,12 +95,12 @@ class MySqlProductRelationSql {
      * - <strong>discontinued:</strong> product discontinued
      * - <strong>minimum_reorder_quantity:</strong> product minimum reorder quantity
      * - <strong>category:</strong> product category
-     * - <strong>code:</strong> product code
+     * - <strong>product_code:</strong> product code
      */
     public const UPDATE_PRODUCT_SQL = <<<EOT
         UPDATE products 
         SET supplier_ids = :supplier_ids, 
-            name = :name, 
+            product_name = :product_name, 
             description = :description,
             standard_cost = :standard_cost,
             list_price = :list_price,
@@ -110,7 +110,7 @@ class MySqlProductRelationSql {
             discontinued = :discontinued,
             minimum_reorder_quantity :minimum_reorder_quantity,
             category = :category
-        WHERE code = :code
+        WHERE product_code = :product_code
         EOT;
 
     /**
@@ -118,9 +118,9 @@ class MySqlProductRelationSql {
      *
      * Params to bind:
      *
-     * - <strong>code:</strong> product code
+     * - <strong>product_code:</strong> product code
      */
-    public const DELETE_PRODUCT_SQL = "DELETE FROM products WHERE code = :code";
+    public const DELETE_PRODUCT_SQL = "DELETE FROM products WHERE product_code = :product_code";
 
     private function __construct() {}
 
