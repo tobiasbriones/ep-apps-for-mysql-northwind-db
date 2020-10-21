@@ -18,4 +18,6 @@ interface PkIdTupleAttribute {
 
     public const ID_PK_ATTR_NAME = "id";
 
+    public function id(): int;
+
 }
