@@ -17,17 +17,17 @@ use Exception;
  * @package App\Config
  */
 class Env {
-    
+
     public const DB_HOST_KEY = "DB_HOST_NAME";
     public const DB_NAME_KEY = "DB_NAME";
     public const DB_ROOT_USERNAME_KEY = "DB_ROOT_USERNAME";
     public const DB_ROOT_PASSWORD_KEY = "DB_ROOT_PASSWORD";
     private static bool $isLoaded = false;
-    
+
     /**
      * Returns the value of the ENV property with the specified key.
      *
-     * @param $key string the ENV key property to get
+     * @param string $key the ENV key property to get
      *
      * @return string the ENV value property from the given key
      * @throws Exception if property wasn't found or the given key is invalid
@@ -43,5 +43,5 @@ class Env {
         }
         return $_ENV[$key];
     }
-    
+
 }
