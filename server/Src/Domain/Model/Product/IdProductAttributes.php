@@ -15,6 +15,8 @@ namespace App\Domain\Model\Product;
  */
 interface IdProductAttributes {
 
+    public const CODE_ATTR_NAME = "code";
+
     public function code(): string;
 
 }
