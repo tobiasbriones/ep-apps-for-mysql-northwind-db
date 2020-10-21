@@ -16,7 +16,7 @@ namespace App\Domain\Model\Product;
 interface ProductAttributes extends IdProductAttributes {
 
     public const SUPPLIER_IDS_ATTR_NAME = "supplier_ids";
-    public const NAME_ATTR_NAME = "name";
+    public const NAME_ATTR_NAME = "product_name";
     public const DESCRIPTION_ATTR_NAME = "description";
     public const STANDARD_COST_ATTR_NAME = "standard_cost";
     public const LIST_PRICE_ATTR_NAME = "list_price";
@@ -29,7 +29,7 @@ interface ProductAttributes extends IdProductAttributes {
 
     public function supplierIds(): string;
 
-    public function name(): string;
+    public function productName(): string;
 
     public function description(): ?string;
 

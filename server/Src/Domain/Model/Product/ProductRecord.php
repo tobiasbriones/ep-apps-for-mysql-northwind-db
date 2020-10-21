@@ -16,8 +16,8 @@ namespace App\Domain\Model\Product;
 class ProductRecord implements Product {
 
     private string $supplierIds;
-    private string $code;
-    private string $name;
+    private string $productCode;
+    private string $productName;
     private ?string $description;
     private float $standardCost;
     private float $listPrice;
@@ -30,8 +30,8 @@ class ProductRecord implements Product {
 
     public function __construct(
         string $supplierIds,
-        string $code,
-        string $name,
+        string $productCode,
+        string $productName,
         ?string $description,
         float $standardCost,
         float $listPrice,
@@ -43,8 +43,8 @@ class ProductRecord implements Product {
         string $category
     ) {
         $this->supplierIds = $supplierIds;
-        $this->code = $code;
-        $this->name = $name;
+        $this->productCode = $productCode;
+        $this->productName = $productName;
         $this->description = $description;
         $this->standardCost = $standardCost;
         $this->listPrice = $listPrice;
@@ -56,16 +56,16 @@ class ProductRecord implements Product {
         $this->category = $category;
     }
 
+    public function productCode(): string {
+        return $this->productCode;
+    }
+
     public function supplierIds(): string {
-        return $this->supplierIds();
+        return $this->supplierIds;
     }
 
-    public function code(): string {
-        return $this->code;
-    }
-
-    public function name(): string {
-        return $this->name;
+    public function productName(): string {
+        return $this->productName;
     }
 
     public function description(): ?string {

@@ -15,8 +15,8 @@ class ProductExtension {
     public static function jsonSerialize(Product $self): array {
         return [
             Product::SUPPLIER_IDS_ATTR_NAME => $self->supplierIds(),
-            Product::CODE_ATTR_NAME => $self->code(),
-            Product::NAME_ATTR_NAME => $self->name(),
+            Product::CODE_ATTR_NAME => $self->productCode(),
+            Product::NAME_ATTR_NAME => $self->productName(),
             Product::DESCRIPTION_ATTR_NAME => $self->description(),
             Product::STANDARD_COST_ATTR_NAME => $self->standardCost(),
             Product::LIST_PRICE_ATTR_NAME => $self->listPrice(),
