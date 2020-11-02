@@ -43,7 +43,7 @@ class ProductsController {
                 );
                 $conn = MySqlPdoConnection::newInstance($params);
                 $productDao = new MySqlProductDao($conn);
-                $product = $productDao->fetch(new ProductId($args["code"]));
+                $product = $productDao->fetch(new ProductId($args["id"]));
 
                 if ($product === null) {
                     $res->withStatus(404);
@@ -55,6 +55,7 @@ class ProductsController {
             }
             catch (Exception $err) {
                 $res = $res->withStatus(500);
+                echo $err;
             }
             return $res;
         };

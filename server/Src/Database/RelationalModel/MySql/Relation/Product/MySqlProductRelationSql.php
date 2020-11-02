@@ -56,7 +56,7 @@ class MySqlProductRelationSql {
      *
      * Params to bind:
      *
-     * - <strong>product_code:</strong> product code
+     * - <strong>id:</strong> product id
      */
     public const FETCH_PRODUCT_SQL = <<<EOT
         SELECT id,
@@ -72,7 +72,7 @@ class MySqlProductRelationSql {
                discontinued,
                minimum_reorder_quantity,
                category
-        FROM products WHERE product_code = :product_code
+        FROM products WHERE id = :id
         EOT;
 
     /**

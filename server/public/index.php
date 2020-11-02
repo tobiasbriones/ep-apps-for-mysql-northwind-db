@@ -24,6 +24,6 @@ $app->get(
 );
 
 $app->get("/api/v1/products", ProductsController::getAll());
-$app->get("/api/v1/products/{code}", ProductsController::get());
+$app->get("/api/v1/products/{id}", ProductsController::get());
 
 $app->run();
