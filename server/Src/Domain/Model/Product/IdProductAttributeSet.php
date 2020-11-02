@@ -15,8 +15,6 @@ namespace App\Domain\Model\Product;
  */
 interface IdProductAttributeSet {
 
-    public const ID_ATTR_NAME = "id";
-
     public function id(): int;
 
 }

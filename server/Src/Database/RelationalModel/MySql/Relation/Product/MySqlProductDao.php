@@ -9,13 +9,13 @@
 namespace App\Database\RelationalModel\MySql\Relation\Product;
 
 use App\Data\Common\Product\ProductDao;
-use App\Data\RelationalModel\Relation\Product\ProductTuple;
 use App\Database\RelationalModel\MySql\MySqlConnectionException;
 use App\Database\RelationalModel\MySql\MySqlPdoConnection;
 use App\Database\RelationalModel\MySql\Relation\BaseDao;
 use App\Domain\Model\Product\AccessorBasedProductBuilder;
 use App\Domain\Model\Product\IdProductAttributeSet;
 use App\Domain\Model\Product\Product;
+use App\Domain\Model\Product\ProductAttributeNames;
 use Exception;
 use PDO;
 use PDOStatement;
@@ -58,18 +58,21 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $minimumReorderQuantity = $product->minimumReorderQuantity();
         $category = $product->category();
 
-        $ps->bindParam(ProductTuple::CODE_ATTR_NAME, $code);
-        $ps->bindParam(ProductTuple::SUPPLIER_IDS_ATTR_NAME, $supplierIds);
-        $ps->bindParam(ProductTuple::NAME_ATTR_NAME, $name);
-        $ps->bindParam(ProductTuple::DESCRIPTION_ATTR_NAME, $description);
-        $ps->bindParam(ProductTuple::STANDARD_COST_ATTR_NAME, $standardCost);
-        $ps->bindParam(ProductTuple::LIST_PRICE_ATTR_NAME, $listPrice);
-        $ps->bindParam(ProductTuple::REORDER_LEVEL_ATTR_NAME, $reorderLevel);
-        $ps->bindParam(ProductTuple::TARGET_LEVEL_ATTR_NAME, $targetLevel);
-        $ps->bindParam(ProductTuple::QUANTITY_PER_UNIT_ATTR_NAME, $quantityPerUnit);
-        $ps->bindParam(ProductTuple::DISCONTINUED_ATTR_NAME, $discontinued);
-        $ps->bindParam(ProductTuple::MINIMUM_REORDER_QUANTITY_ATTR_NAME, $minimumReorderQuantity);
-        $ps->bindParam(ProductTuple::CATEGORY_ATTR_NAME, $category);
+        $ps->bindParam(ProductAttributeNames::CODE_ATTR_NAME, $code);
+        $ps->bindParam(ProductAttributeNames::SUPPLIER_IDS_ATTR_NAME, $supplierIds);
+        $ps->bindParam(ProductAttributeNames::NAME_ATTR_NAME, $name);
+        $ps->bindParam(ProductAttributeNames::DESCRIPTION_ATTR_NAME, $description);
+        $ps->bindParam(ProductAttributeNames::STANDARD_COST_ATTR_NAME, $standardCost);
+        $ps->bindParam(ProductAttributeNames::LIST_PRICE_ATTR_NAME, $listPrice);
+        $ps->bindParam(ProductAttributeNames::REORDER_LEVEL_ATTR_NAME, $reorderLevel);
+        $ps->bindParam(ProductAttributeNames::TARGET_LEVEL_ATTR_NAME, $targetLevel);
+        $ps->bindParam(ProductAttributeNames::QUANTITY_PER_UNIT_ATTR_NAME, $quantityPerUnit);
+        $ps->bindParam(ProductAttributeNames::DISCONTINUED_ATTR_NAME, $discontinued);
+        $ps->bindParam(
+            ProductAttributeNames::MINIMUM_REORDER_QUANTITY_ATTR_NAME,
+            $minimumReorderQuantity
+        );
+        $ps->bindParam(ProductAttributeNames::CATEGORY_ATTR_NAME, $category);
     }
 
     /**
@@ -83,7 +86,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $id = $id->id();
         $ps = $conn->prepare(MySqlProductRelationSql::FETCH_PRODUCT_SQL);
 
-        $ps->bindParam(ProductTuple::ID_PK_ATTR_NAME, $id);
+        $ps->bindParam(ProductAttributeNames::ID_ATTR_NAME, $id);
         if (!$ps->execute()) {
             $msg = "Fail to fetch product: $id";
             throw new MySqlConnectionException($msg);
@@ -111,7 +114,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $ps = $conn->prepare(MySqlProductRelationSql::UPDATE_PRODUCT_SQL);
 
         self::bindAllParams($product, $ps);
-        $ps->bindParam(ProductTuple::ID_ATTR_NAME, $id);
+        $ps->bindParam(ProductAttributeNames::ID_ATTR_NAME, $id);
 
         if (!$ps->execute()) {
             $msg = "Fail to update product: $product";
@@ -129,7 +132,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $id = $product->id();
         $ps = $conn->prepare(MySqlProductRelationSql::DELETE_PRODUCT_SQL);
 
-        $ps->bindParam(ProductTuple::ID_PK_ATTR_NAME, $id);
+        $ps->bindParam(ProductAttributeNames::ID_ATTR_NAME, $id);
         if (!$ps->execute()) {
             $msg = "Fail to delete product: $product";
             throw new MySqlConnectionException($msg);
