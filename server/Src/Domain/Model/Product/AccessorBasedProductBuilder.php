@@ -14,7 +14,7 @@ use Exception;
  * Builds a Product record from a ProductAccessor. This builder is reusable.
  *
  * @package App\Domain\Model\Product
- * @see ProductAccessor
+ * @see     ProductAccessor
  */
 class AccessorBasedProductBuilder {
 
@@ -37,6 +37,7 @@ class AccessorBasedProductBuilder {
             throw new Exception($msg);
         }
         return new ProductRecord(
+            $this->accessor->getId(),
             $this->accessor->getSupplierIds(),
             $this->accessor->getCode(),
             $this->accessor->getName(),

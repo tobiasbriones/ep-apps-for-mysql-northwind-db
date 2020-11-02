@@ -10,14 +10,14 @@ namespace App\Domain\Model\Product;
 
 class ProductId implements IdProductAttributes {
 
-    private string $productCode;
+    private int $id;
 
-    public function __construct(string $productCode) {
-        $this->productCode = $productCode;
+    public function __construct(int $id) {
+        $this->id = $id;
     }
 
-    public function productCode(): string {
-        return $this->productCode;
+    public function id(): int {
+        return $this->id;
     }
 
 }

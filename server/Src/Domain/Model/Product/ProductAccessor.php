@@ -16,6 +16,8 @@ namespace App\Domain\Model\Product;
  */
 interface ProductAccessor {
 
+    public function getId(): int;
+
     public function getSupplierIds(): string;
 
     public function getCode(): string;

@@ -19,6 +19,10 @@ class ArrayBasedProductAccessor implements ProductAccessor {
         $this->productArray = $productArray;
     }
 
+    public function getId(): int {
+        return $this->productArray[ProductTuple::ID_PK_ATTR_NAME];
+    }
+
     public function getSupplierIds(): string {
         return $this->productArray[ProductTuple::SUPPLIER_IDS_ATTR_NAME];
     }

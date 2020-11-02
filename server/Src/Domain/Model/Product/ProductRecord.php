@@ -15,6 +15,7 @@ namespace App\Domain\Model\Product;
  */
 class ProductRecord implements Product {
 
+    private int $id;
     private string $supplierIds;
     private string $productCode;
     private string $productName;
@@ -29,6 +30,7 @@ class ProductRecord implements Product {
     private string $category;
 
     public function __construct(
+        int $id,
         string $supplierIds,
         string $productCode,
         string $productName,
@@ -42,6 +44,7 @@ class ProductRecord implements Product {
         int $minimumReorderQuantity,
         string $category
     ) {
+        $this->id = $id;
         $this->supplierIds = $supplierIds;
         $this->productCode = $productCode;
         $this->productName = $productName;
@@ -54,6 +57,10 @@ class ProductRecord implements Product {
         $this->discontinued = $discontinued;
         $this->minimumReorderQuantity = $minimumReorderQuantity;
         $this->category = $category;
+    }
+
+    public function id(): int {
+        return $this->id;
     }
 
     public function productCode(): string {

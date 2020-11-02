@@ -15,6 +15,7 @@ namespace App\Domain\Model\Product;
  */
 interface ProductAttributes extends IdProductAttributes {
 
+    public const CODE_ATTR_NAME = "product_code";
     public const SUPPLIER_IDS_ATTR_NAME = "supplier_ids";
     public const NAME_ATTR_NAME = "product_name";
     public const DESCRIPTION_ATTR_NAME = "description";
@@ -26,6 +27,8 @@ interface ProductAttributes extends IdProductAttributes {
     public const DISCONTINUED_ATTR_NAME = "discontinued";
     public const MINIMUM_REORDER_QUANTITY_ATTR_NAME = "minimum_reorder_quantity";
     public const CATEGORY_ATTR_NAME = "category";
+
+    public function productCode(): string;
 
     public function supplierIds(): string;
 

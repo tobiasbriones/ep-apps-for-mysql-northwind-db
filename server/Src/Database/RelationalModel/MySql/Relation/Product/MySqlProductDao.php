@@ -80,10 +80,10 @@ class MySqlProductDao extends BaseDao implements ProductDao {
      */
     public function fetch(IdProductAttributes $id): ?Product {
         $conn = $this->getConnection();
-        $code = $id->productCode();
+        $id = $id->id();
         $ps = $conn->prepare(MySqlProductRelationSql::FETCH_PRODUCT_SQL);
 
-        $ps->bindParam(ProductTuple::CODE_ATTR_NAME, $code);
+        $ps->bindParam(ProductTuple::ID_PK_ATTR_NAME, $id);
         if (!$ps->execute()) {
             $msg = "Fail to fetch product: $id";
             throw new MySqlConnectionException($msg);
@@ -106,10 +106,12 @@ class MySqlProductDao extends BaseDao implements ProductDao {
      * @throws MySqlConnectionException if something fails
      */
     public function update(Product $product): void {
+        $id = $product->id();
         $conn = $this->getConnection();
         $ps = $conn->prepare(MySqlProductRelationSql::UPDATE_PRODUCT_SQL);
 
         self::bindAllParams($product, $ps);
+        $ps->bindParam(ProductTuple::ID_ATTR_NAME, $id);
 
         if (!$ps->execute()) {
             $msg = "Fail to update product: $product";
@@ -124,10 +126,10 @@ class MySqlProductDao extends BaseDao implements ProductDao {
      */
     public function delete(Product $product): void {
         $conn = $this->getConnection();
-        $code = $product->productCode();
+        $id = $product->id();
         $ps = $conn->prepare(MySqlProductRelationSql::DELETE_PRODUCT_SQL);
 
-        $ps->bindParam(ProductTuple::CODE_ATTR_NAME, $code);
+        $ps->bindParam(ProductTuple::ID_PK_ATTR_NAME, $id);
         if (!$ps->execute()) {
             $msg = "Fail to delete product: $product";
             throw new MySqlConnectionException($msg);
