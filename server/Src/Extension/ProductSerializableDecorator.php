@@ -12,12 +12,64 @@ use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductAttributeNames;
 use JsonSerializable;
 
-class ProductJsonSerializable implements JsonSerializable {
+class ProductSerializableDecorator implements Product, JsonSerializable {
 
     private Product $product;
 
     public function __construct(Product $product) {
         $this->product = $product;
+    }
+    
+    public function id(): int {
+        return $this->product->id();
+    }
+
+    public function productCode(): ?string {
+        return $this->product->productCode();
+    }
+
+    public function supplierIds(): ?string {
+        return $this->product->supplierIds();
+    }
+
+    public function productName(): ?string {
+        return $this->product->productName();
+    }
+
+    public function description(): ?string {
+        return $this->product->description();
+    }
+
+    public function standardCost(): ?float {
+        return $this->product->standardCost();
+    }
+
+    public function listPrice(): float {
+        return $this->product->listPrice();
+    }
+
+    public function reorderLevel(): ?int {
+        return $this->product->reorderLevel();
+    }
+
+    public function targetLevel(): ?int {
+        return $this->product->targetLevel();
+    }
+
+    public function quantityPerUnit(): ?string {
+        return $this->product->quantityPerUnit();
+    }
+
+    public function discontinued(): bool {
+        return $this->product->discontinued();
+    }
+
+    public function minimumReorderQuantity(): ?int {
+        return $this->product->minimumReorderQuantity();
+    }
+
+    public function category(): ?string {
+        return $this->product->category();
     }
 
     public function jsonSerialize(): array {
@@ -34,7 +86,8 @@ class ProductJsonSerializable implements JsonSerializable {
             ProductAttributeNames::TARGET_LEVEL_ATTR_NAME => $self->targetLevel(),
             ProductAttributeNames::QUANTITY_PER_UNIT_ATTR_NAME => $self->quantityPerUnit(),
             ProductAttributeNames::DISCONTINUED_ATTR_NAME => $self->discontinued(),
-            ProductAttributeNames::MINIMUM_REORDER_QUANTITY_ATTR_NAME => $self->minimumReorderQuantity(),
+            ProductAttributeNames::MINIMUM_REORDER_QUANTITY_ATTR_NAME => $self->minimumReorderQuantity(
+            ),
             ProductAttributeNames::CATEGORY_ATTR_NAME => $self->category()
         ];
     }

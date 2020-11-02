@@ -16,6 +16,7 @@ use App\Domain\Model\Product\AccessorBasedProductBuilder;
 use App\Domain\Model\Product\IdProductAttributeSet;
 use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductAttributeNames;
+use App\Extension\ProductSerializableDecorator;
 use Exception;
 use PDO;
 use PDOStatement;
@@ -53,8 +54,11 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $ps->bindParam(ProductAttributeNames::CATEGORY_ATTR_NAME, $category);
     }
 
+    private bool $useSerializableModel;
+
     public function __construct(MySqlPdoConnection $connection) {
         parent::__construct($connection);
+        $this->useSerializableModel = true;
     }
 
     /**
@@ -96,11 +100,22 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         if (!$row) {
             return null;
         }
-        $accessor = new ArrayBasedProductAccessor($row);
         $builder = new AccessorBasedProductBuilder();
 
+        return $this->newProductInstance($row, $builder);
+    }
+
+    private function newProductInstance(array $row, AccessorBasedProductBuilder $builder): Product {
+        $accessor = new ArrayBasedProductAccessor($row);
+        $product = null;
+
         $builder->set($accessor);
-        return $builder->build();
+        $product = $builder->build();
+
+        if ($this->useSerializableModel) {
+            $product = new ProductSerializableDecorator($product);
+        }
+        return $product;
     }
 
     /**
