@@ -23,15 +23,15 @@ class ArrayBasedProductAccessor implements ProductAccessor {
         return $this->productArray[ProductAttributeNames::ID_ATTR_NAME];
     }
 
-    public function getSupplierIds(): string {
+    public function getSupplierIds(): ?string {
         return $this->productArray[ProductAttributeNames::SUPPLIER_IDS_ATTR_NAME];
     }
 
-    public function getCode(): string {
+    public function getCode(): ?string {
         return $this->productArray[ProductAttributeNames::CODE_ATTR_NAME];
     }
 
-    public function getName(): string {
+    public function getName(): ?string {
         return $this->productArray[ProductAttributeNames::NAME_ATTR_NAME];
     }
 
@@ -39,7 +39,7 @@ class ArrayBasedProductAccessor implements ProductAccessor {
         return $this->productArray[ProductAttributeNames::DESCRIPTION_ATTR_NAME];
     }
 
-    public function getStandardCost(): float {
+    public function getStandardCost(): ?float {
         return $this->productArray[ProductAttributeNames::STANDARD_COST_ATTR_NAME];
     }
 
@@ -47,15 +47,15 @@ class ArrayBasedProductAccessor implements ProductAccessor {
         return $this->productArray[ProductAttributeNames::LIST_PRICE_ATTR_NAME];
     }
 
-    public function getReorderLevel(): int {
+    public function getReorderLevel(): ?int {
         return $this->productArray[ProductAttributeNames::REORDER_LEVEL_ATTR_NAME];
     }
 
-    public function getTargetLevel(): int {
+    public function getTargetLevel(): ?int {
         return $this->productArray[ProductAttributeNames::TARGET_LEVEL_ATTR_NAME];
     }
 
-    public function getQuantityPerUnit(): string {
+    public function getQuantityPerUnit(): ?string {
         return $this->productArray[ProductAttributeNames::QUANTITY_PER_UNIT_ATTR_NAME];
     }
 
@@ -67,7 +67,7 @@ class ArrayBasedProductAccessor implements ProductAccessor {
         return $this->productArray[ProductAttributeNames::MINIMUM_REORDER_QUANTITY_ATTR_NAME];
     }
 
-    public function getCategory(): string {
+    public function getCategory(): ?string {
         return $this->productArray[ProductAttributeNames::CATEGORY_ATTR_NAME];
     }
 

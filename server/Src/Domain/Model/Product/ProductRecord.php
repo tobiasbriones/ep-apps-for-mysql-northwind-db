@@ -31,18 +31,18 @@ class ProductRecord implements Product {
 
     public function __construct(
         int $id,
-        string $supplierIds,
-        string $productCode,
-        string $productName,
+        ?string $supplierIds,
+        ?string $productCode,
+        ?string $productName,
         ?string $description,
-        float $standardCost,
+        ?float $standardCost,
         float $listPrice,
-        int $reorderLevel,
-        int $targetLevel,
-        string $quantityPerUnit,
+        ?int $reorderLevel,
+        ?int $targetLevel,
+        ?string $quantityPerUnit,
         bool $discontinued,
-        int $minimumReorderQuantity,
-        string $category
+        ?int $minimumReorderQuantity,
+        ?string $category
     ) {
         $this->id = $id;
         $this->supplierIds = $supplierIds;
