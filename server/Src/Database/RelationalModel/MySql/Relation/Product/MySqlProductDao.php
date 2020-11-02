@@ -22,28 +22,6 @@ use PDOStatement;
 
 class MySqlProductDao extends BaseDao implements ProductDao {
 
-    public function __construct(MySqlPdoConnection $connection) {
-        parent::__construct($connection);
-    }
-
-    /**
-     * @param Product $product
-     *
-     * @return Product
-     * @throws MySqlConnectionException if something fails
-     */
-    public function create(Product $product): Product {
-        $conn = $this->getConnection();
-        $ps = $conn->prepare(MySqlProductRelationSql::CREATE_PRODUCT_SQL);
-
-        self::bindAllParams($product, $ps);
-        if (!$ps->execute()) {
-            $msg = "Fail to create product: $product";
-            throw new MySqlConnectionException($msg);
-        }
-        return $product;
-    }
-
     private static function bindAllParams(Product $product, PDOStatement $ps): void {
         $code = $product->productCode();
         $supplierIds = $product->supplierIds();
@@ -73,6 +51,28 @@ class MySqlProductDao extends BaseDao implements ProductDao {
             $minimumReorderQuantity
         );
         $ps->bindParam(ProductAttributeNames::CATEGORY_ATTR_NAME, $category);
+    }
+
+    public function __construct(MySqlPdoConnection $connection) {
+        parent::__construct($connection);
+    }
+
+    /**
+     * @param Product $product
+     *
+     * @return Product
+     * @throws MySqlConnectionException if something fails
+     */
+    public function create(Product $product): Product {
+        $conn = $this->getConnection();
+        $ps = $conn->prepare(MySqlProductRelationSql::CREATE_PRODUCT_SQL);
+
+        self::bindAllParams($product, $ps);
+        if (!$ps->execute()) {
+            $msg = "Fail to create product: $product";
+            throw new MySqlConnectionException($msg);
+        }
+        return $product;
     }
 
     /**
