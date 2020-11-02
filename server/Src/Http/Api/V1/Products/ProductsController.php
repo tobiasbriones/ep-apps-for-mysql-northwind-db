@@ -12,18 +12,51 @@ use App\Config\Env;
 use App\Database\RelationalModel\MySql\MySqlPdoConnection;
 use App\Database\RelationalModel\MySql\Relation\Product\MySqlProductDao;
 use App\Database\RelationalModel\PdoParams;
-use App\Extension\ProductSerializableDecorator;
+use App\Http\Util\RequestUtils;
 use App\Repository\AppProductRepository;
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+// Many things are left to implement for this layer of the App. I'll be back.
 class ProductsController {
+
+    private const GET_ALL_PAGE_PARAM_NAME = "page";
+    private const GET_ALL_PAGE_PARAM_DEF_VALUE = 0;
+    private const GET_ALL_LIMIT_PARAM_NAME = "limit";
+    private const GET_ALL_LIMIT_PARAM_DEF_VALUE = 15;
 
     public static function getAll(): callable {
         return function (Request $req, Response $res): Response {
             try {
-                $res->getBody()->write(json_encode(["all"]));
+                $page = RequestUtils::getIntQueryParam(
+                    $req,
+                    self::GET_ALL_PAGE_PARAM_NAME,
+                    self::GET_ALL_PAGE_PARAM_DEF_VALUE
+                );
+                $limit = RequestUtils::getIntQueryParam(
+                    $req,
+                    self::GET_ALL_LIMIT_PARAM_NAME,
+                    self::GET_ALL_LIMIT_PARAM_DEF_VALUE
+                );
+                $params = new PdoParams(
+                    Env::get(Env::DB_HOST_KEY),
+                    Env::get(Env::DB_NAME_KEY),
+                    Env::get(Env::DB_ROOT_USERNAME_KEY),
+                    Env::get(Env::DB_ROOT_PASSWORD_KEY)
+                );
+                $conn = MySqlPdoConnection::newInstance($params);
+                $productDao = new MySqlProductDao($conn);
+                $productRepository = new AppProductRepository($productDao);
+                $products = $productRepository->getAll($page, $limit);
+
+                if (sizeof($products) === 0) {
+                    $res->withStatus(404);
+                    $res->getBody()->write(json_encode(["msg" => "Not found"]));
+                }
+                else {
+                    $res->getBody()->write(json_encode($products));
+                }
             }
             catch (Exception $err) {
                 $res = $res->withStatus(500);
