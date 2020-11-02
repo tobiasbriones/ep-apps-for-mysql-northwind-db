@@ -54,11 +54,11 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $ps->bindParam(ProductAttributeNames::CATEGORY_ATTR_NAME, $category);
     }
 
-    private bool $useSerializableModel;
+    private bool $useSerializableRecord;
 
     public function __construct(MySqlPdoConnection $connection) {
         parent::__construct($connection);
-        $this->useSerializableModel = true;
+        $this->useSerializableRecord = true;
     }
 
     /**
@@ -100,22 +100,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         if (!$row) {
             return null;
         }
-        $builder = new AccessorBasedProductBuilder();
-
-        return $this->newProductInstance($row, $builder);
-    }
-
-    private function newProductInstance(array $row, AccessorBasedProductBuilder $builder): Product {
-        $accessor = new ArrayBasedProductAccessor($row);
-        $product = null;
-
-        $builder->set($accessor);
-        $product = $builder->build();
-
-        if ($this->useSerializableModel) {
-            $product = new ProductSerializableDecorator($product);
-        }
-        return $product;
+        return $this->newProductInstance($row);
     }
 
     /**
@@ -141,9 +126,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         }
 
         while (($row = $ps->fetch(PDO::FETCH_ASSOC))) {
-            $accessor = new ArrayBasedProductAccessor($row);
-            $builder->set($accessor);
-            $products[] = $builder->build();
+            $products[] = $this->newProductInstance($row, $builder);
         }
         return $products;
     }
@@ -182,6 +165,32 @@ class MySqlProductDao extends BaseDao implements ProductDao {
             $msg = "Fail to delete product: $product";
             throw new MySqlConnectionException($msg);
         }
+    }
+
+    /**
+     * @param array                            $row
+     * @param AccessorBasedProductBuilder|null $reusableBuilder
+     *
+     * @return Product
+     * @throws Exception
+     */
+    private function newProductInstance(
+        array $row,
+        ?AccessorBasedProductBuilder $reusableBuilder = null
+    ): Product {
+        $builder = ($reusableBuilder === null)
+            ? new AccessorBasedProductBuilder()
+            : $reusableBuilder;
+        $accessor = new ArrayBasedProductAccessor($row);
+        $product = null;
+
+        $builder->set($accessor);
+        $product = $builder->build();
+
+        if ($this->useSerializableRecord) {
+            $product = new ProductSerializableDecorator($product);
+        }
+        return $product;
     }
 
 }
