@@ -13,7 +13,7 @@ namespace App\Domain\Model\Product;
  *
  * @package App\Domain\Model\Product
  */
-interface ProductAttributes extends IdProductAttributes {
+interface ProductAttributeSet extends IdProductAttributeSet {
 
     public const CODE_ATTR_NAME = "product_code";
     public const SUPPLIER_IDS_ATTR_NAME = "supplier_ids";

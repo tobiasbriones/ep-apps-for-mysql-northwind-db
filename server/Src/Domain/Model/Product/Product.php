@@ -13,4 +13,4 @@ namespace App\Domain\Model\Product;
  *
  * @package App\Domain\Model\Product
  */
-interface Product extends ProductAttributes {}
+interface Product extends ProductAttributeSet {}

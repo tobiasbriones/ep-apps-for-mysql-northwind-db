@@ -9,11 +9,11 @@
 namespace App\Data\RelationalModel\Relation\Product;
 
 use App\Data\RelationalModel\Relation\PkIdTupleAttribute;
-use App\Domain\Model\Product\ProductAttributes;
+use App\Domain\Model\Product\ProductAttributeSet;
 
 /**
  * Defines the Product Tuple from the product relation.
  *
  * @package App\Data\RelationalModel\Relation\Product
  */
-interface ProductTuple extends PkIdTupleAttribute, ProductAttributes {}
+interface ProductTuple extends PkIdTupleAttribute, ProductAttributeSet {}

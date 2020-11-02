@@ -8,7 +8,7 @@
 
 namespace App\Data\Common\Product;
 
-use App\Domain\Model\Product\IdProductAttributes;
+use App\Domain\Model\Product\IdProductAttributeSet;
 use App\Domain\Model\Product\Product;
 
 /**
@@ -20,7 +20,7 @@ interface ProductDao {
 
     public function create(Product $product): Product;
 
-    public function fetch(IdProductAttributes $id): ?Product;
+    public function fetch(IdProductAttributeSet $id): ?Product;
 
     public function update(Product $product): void;
 

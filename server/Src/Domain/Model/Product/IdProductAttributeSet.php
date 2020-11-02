@@ -13,7 +13,7 @@ namespace App\Domain\Model\Product;
  *
  * @package App\Domain\Model\Product
  */
-interface IdProductAttributes {
+interface IdProductAttributeSet {
 
     public const ID_ATTR_NAME = "id";
 

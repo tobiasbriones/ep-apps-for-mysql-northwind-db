@@ -14,7 +14,7 @@ use App\Database\RelationalModel\MySql\MySqlConnectionException;
 use App\Database\RelationalModel\MySql\MySqlPdoConnection;
 use App\Database\RelationalModel\MySql\Relation\BaseDao;
 use App\Domain\Model\Product\AccessorBasedProductBuilder;
-use App\Domain\Model\Product\IdProductAttributes;
+use App\Domain\Model\Product\IdProductAttributeSet;
 use App\Domain\Model\Product\Product;
 use Exception;
 use PDO;
@@ -73,12 +73,12 @@ class MySqlProductDao extends BaseDao implements ProductDao {
     }
 
     /**
-     * @param IdProductAttributes $id product to fetch
+     * @param IdProductAttributeSet $id product to fetch
      *
      * @return Product|null
      * @throws MySqlConnectionException|Exception if something fails
      */
-    public function fetch(IdProductAttributes $id): ?Product {
+    public function fetch(IdProductAttributeSet $id): ?Product {
         $conn = $this->getConnection();
         $id = $id->id();
         $ps = $conn->prepare(MySqlProductRelationSql::FETCH_PRODUCT_SQL);

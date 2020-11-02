@@ -8,7 +8,7 @@
 
 namespace App\Data\RelationalModel\Relation;
 
-use App\Domain\Model\Product\IdProductAttributes;
+use App\Domain\Model\Product\IdProductAttributeSet;
 
 /**
  * Defines the tuple primary key attribute. The id is a positive autoincrement
@@ -18,7 +18,7 @@ use App\Domain\Model\Product\IdProductAttributes;
  */
 interface PkIdTupleAttribute {
 
-    public const ID_PK_ATTR_NAME = IdProductAttributes::ID_ATTR_NAME;
+    public const ID_PK_ATTR_NAME = IdProductAttributeSet::ID_ATTR_NAME;
 
     public function id(): int;
 

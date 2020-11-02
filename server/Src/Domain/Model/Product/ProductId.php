@@ -8,7 +8,7 @@
 
 namespace App\Domain\Model\Product;
 
-class ProductId implements IdProductAttributes {
+class ProductId implements IdProductAttributeSet {
 
     private int $id;
 
