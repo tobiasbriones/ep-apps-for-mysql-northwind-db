@@ -63,7 +63,7 @@ class ArrayBasedProductAccessor implements ProductAccessor {
         return $this->productArray[ProductAttributeNames::DISCONTINUED_ATTR_NAME];
     }
 
-    public function getMinimumReorderQuantity(): int {
+    public function getMinimumReorderQuantity(): ?int {
         return $this->productArray[ProductAttributeNames::MINIMUM_REORDER_QUANTITY_ATTR_NAME];
     }
 

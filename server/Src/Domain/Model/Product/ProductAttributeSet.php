@@ -15,28 +15,28 @@ namespace App\Domain\Model\Product;
  */
 interface ProductAttributeSet extends IdProductAttributeSet {
 
-    public function productCode(): string;
+    public function productCode(): ?string;
 
-    public function supplierIds(): string;
+    public function supplierIds(): ?string;
 
-    public function productName(): string;
+    public function productName(): ?string;
 
     public function description(): ?string;
 
-    public function standardCost(): float;
+    public function standardCost(): ?float;
 
     public function listPrice(): float;
 
-    public function reorderLevel(): int;
+    public function reorderLevel(): ?int;
 
-    public function targetLevel(): int;
+    public function targetLevel(): ?int;
 
-    public function quantityPerUnit(): string;
+    public function quantityPerUnit(): ?string;
 
     public function discontinued(): bool;
 
-    public function minimumReorderQuantity(): int;
+    public function minimumReorderQuantity(): ?int;
 
-    public function category(): string;
+    public function category(): ?string;
 
 }

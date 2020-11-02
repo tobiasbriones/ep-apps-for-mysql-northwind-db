@@ -16,30 +16,30 @@ namespace App\Domain\Model\Product;
  */
 interface ProductAccessor {
 
-    public function getId(): int;
+    public function getId(): ?int;
 
-    public function getSupplierIds(): string;
+    public function getSupplierIds(): ?string;
 
-    public function getCode(): string;
+    public function getCode(): ?string;
 
-    public function getName(): string;
+    public function getName(): ?string;
 
     public function getDescription(): ?string;
 
-    public function getStandardCost(): float;
+    public function getStandardCost(): ?float;
 
     public function getListPrice(): float;
 
-    public function getReorderLevel(): int;
+    public function getReorderLevel(): ?int;
 
-    public function getTargetLevel(): int;
+    public function getTargetLevel(): ?int;
 
-    public function getQuantityPerUnit(): string;
+    public function getQuantityPerUnit(): ?string;
 
     public function getDiscontinued(): bool;
 
-    public function getMinimumReorderQuantity(): int;
+    public function getMinimumReorderQuantity(): ?int;
 
-    public function getCategory(): string;
+    public function getCategory(): ?string;
 
 }
