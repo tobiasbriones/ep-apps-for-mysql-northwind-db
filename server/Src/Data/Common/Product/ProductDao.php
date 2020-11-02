@@ -22,6 +22,8 @@ interface ProductDao {
 
     public function fetch(IdProductAttributeSet $id): ?Product;
 
+    public function fetchAll(int $page, int $limit): array;
+
     public function update(Product $product): void;
 
     public function delete(Product $product): void;

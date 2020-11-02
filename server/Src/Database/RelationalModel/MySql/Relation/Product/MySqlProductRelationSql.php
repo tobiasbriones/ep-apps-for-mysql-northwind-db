@@ -81,6 +81,21 @@ class MySqlProductRelationSql {
     public const FETCH_ALL_PRODUCTS_SQL = "SELECT * FROM products";
 
     /**
+     * SQL query that selects all of the products by pagination.
+     *
+     * Params to bind:
+     *
+     * - <strong>limit:</strong> page limit number
+     * - <strong>offset_rows:</strong> offset rows
+     */
+    public const FETCH_ALL_PRODUCTS_BY_PAGE_SQL = <<<EOT
+        SELECT * FROM products 
+        ORDER BY product_code
+        LIMIT :limit
+        OFFSET :offset_rows
+        EOT;
+
+    /**
      * SQL query to update a product by code. The product code is not changed.
      *
      * Params to bind:

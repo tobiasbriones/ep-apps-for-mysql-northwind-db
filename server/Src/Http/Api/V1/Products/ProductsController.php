@@ -12,8 +12,8 @@ use App\Config\Env;
 use App\Database\RelationalModel\MySql\MySqlPdoConnection;
 use App\Database\RelationalModel\MySql\Relation\Product\MySqlProductDao;
 use App\Database\RelationalModel\PdoParams;
-use App\Domain\Model\Product\ProductId;
 use App\Extension\ProductExtension;
+use App\Repository\AppProductRepository;
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -43,7 +43,8 @@ class ProductsController {
                 );
                 $conn = MySqlPdoConnection::newInstance($params);
                 $productDao = new MySqlProductDao($conn);
-                $product = $productDao->fetch(new ProductId($args["id"]));
+                $productRepository = new AppProductRepository($productDao);
+                $product = $productRepository->get($args["id"]);
 
                 if ($product === null) {
                     $res->withStatus(404);

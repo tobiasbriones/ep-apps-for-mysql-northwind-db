@@ -104,6 +104,36 @@ class MySqlProductDao extends BaseDao implements ProductDao {
     }
 
     /**
+     * @param int $page
+     * @param int $limit
+     *
+     * @return array
+     * @throws MySqlConnectionException|Exception if something fails
+     */
+    public function fetchAll(int $page, int $limit): array {
+        $products = [];
+        $offsetRows = $page * $limit;
+        $builder = new AccessorBasedProductBuilder();
+        $conn = $this->getConnection();
+        $ps = $conn->prepare(MySqlProductRelationSql::FETCH_ALL_PRODUCTS_BY_PAGE_SQL);
+
+        $ps->bindParam("offset_rows", $offsetRows, PDO::PARAM_INT);
+        $ps->bindParam("limit", $limit, PDO::PARAM_INT);
+
+        if (!$ps->execute()) {
+            $msg = "Fail to fetch products";
+            throw new MySqlConnectionException($msg);
+        }
+
+        while (($row = $ps->fetch(PDO::FETCH_ASSOC))) {
+            $accessor = new ArrayBasedProductAccessor($row);
+            $builder->set($accessor);
+            $products[] = $builder->build();
+        }
+        return $products;
+    }
+
+    /**
      * @param Product $product product to update
      *
      * @throws MySqlConnectionException if something fails
