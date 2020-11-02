@@ -10,10 +10,18 @@ namespace App\Extension;
 
 use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductAttributeNames;
+use JsonSerializable;
 
-class ProductExtension {
+class ProductJsonSerializable implements JsonSerializable {
 
-    public static function jsonSerialize(Product $self): array {
+    private Product $product;
+
+    public function __construct(Product $product) {
+        $this->product = $product;
+    }
+
+    public function jsonSerialize(): array {
+        $self = $this->product;
         return [
             ProductAttributeNames::ID_ATTR_NAME => $self->id(),
             ProductAttributeNames::SUPPLIER_IDS_ATTR_NAME => $self->supplierIds(),

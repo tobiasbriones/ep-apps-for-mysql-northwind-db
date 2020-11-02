@@ -12,7 +12,7 @@ use App\Config\Env;
 use App\Database\RelationalModel\MySql\MySqlPdoConnection;
 use App\Database\RelationalModel\MySql\Relation\Product\MySqlProductDao;
 use App\Database\RelationalModel\PdoParams;
-use App\Extension\ProductExtension;
+use App\Extension\ProductJsonSerializable;
 use App\Repository\AppProductRepository;
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -51,7 +51,8 @@ class ProductsController {
                     $res->getBody()->write(json_encode(["msg" => "Not found"]));
                 }
                 else {
-                    $res->getBody()->write(json_encode(ProductExtension::jsonSerialize($product)));
+                    $productSerializable = new ProductJsonSerializable($product);
+                    $res->getBody()->write(json_encode($productSerializable));
                 }
             }
             catch (Exception $err) {
