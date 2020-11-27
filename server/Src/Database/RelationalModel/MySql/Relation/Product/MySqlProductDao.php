@@ -54,11 +54,9 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $ps->bindParam(ProductAttributeNames::CATEGORY_ATTR_NAME, $category);
     }
 
-    private bool $useSerializableRecord;
 
     public function __construct(MySqlPdoConnection $connection) {
         parent::__construct($connection);
-        $this->useSerializableRecord = true;
     }
 
     /**
@@ -187,7 +185,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $builder->set($accessor);
         $product = $builder->build();
 
-        if ($this->useSerializableRecord) {
+        if ($this->shallUseSerializableRecord()) {
             $product = new ProductSerializableDecorator($product);
         }
         return $product;

@@ -20,13 +20,19 @@ use PDO;
 class BaseDao {
 
     private PDO $connection;
+    private bool $shallUseSerializableRecord;
 
     public function __construct(MySqlPdoConnection $connection) {
         $this->connection = $connection->getConnection();
+        $this->shallUseSerializableRecord = true;
     }
 
     protected final function getConnection(): PDO {
         return $this->connection;
+    }
+
+    public function shallUseSerializableRecord(): bool {
+        return $this->shallUseSerializableRecord;
     }
 
 }
