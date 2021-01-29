@@ -10,6 +10,7 @@ namespace App\Http\Api\V1\Products;
 
 use App\Config\Database\AppDatabaseConfig;
 use App\Config\Env;
+use App\Config\Http\AppSerialization;
 use App\Database\Factory\ConnectionFactory;
 use App\Database\Factory\ProductDaoFactory;
 use App\Database\RelationalModel\MySql\MySqlPdoConnection;
@@ -28,6 +29,7 @@ class ProductsController {
     private const GET_ALL_PAGE_PARAM_DEF_VALUE = 0;
     private const GET_ALL_LIMIT_PARAM_NAME = "limit";
     private const GET_ALL_LIMIT_PARAM_DEF_VALUE = 15;
+    private const FORMAT_PARAM_NAME = "format";
 
     public static function getAll(): callable {
         return function (Request $req, Response $res): Response {
@@ -89,7 +91,14 @@ class ProductsController {
                     $res->getBody()->write(json_encode(["msg" => "Not found"]));
                 }
                 else {
-                    $res->getBody()->write(json_encode($product));
+                    $serialization = RequestUtils::getStringQueryParam(
+                        $req,
+                        self::FORMAT_PARAM_NAME,
+                        AppSerialization::DEF_SERIALIZATION
+                    );
+                    $serializable = new ProductSerializable($product);
+                    $enc = $serializable->serialize($serialization);
+                    $res->getBody()->write($enc);
                 }
             }
             catch (Exception $err) {
