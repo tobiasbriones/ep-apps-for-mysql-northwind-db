@@ -15,6 +15,24 @@ namespace App\Domain\Model\Product;
  */
 class ProductRecord implements Product {
 
+    public static function of(ProductAccessor $accessor): Product {
+        return new ProductRecord(
+            $accessor->getId(),
+            $accessor->getSupplierIds(),
+            $accessor->getCode(),
+            $accessor->getName(),
+            $accessor->getDescription(),
+            $accessor->getStandardCost(),
+            $accessor->getListPrice(),
+            $accessor->getReorderLevel(),
+            $accessor->getTargetLevel(),
+            $accessor->getQuantityPerUnit(),
+            $accessor->getDiscontinued(),
+            $accessor->getMinimumReorderQuantity(),
+            $accessor->getCategory()
+        );
+    }
+
     public function __construct(
         private int $id,
         private ?string $supplierIds,

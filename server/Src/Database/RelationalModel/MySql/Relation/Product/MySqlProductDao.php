@@ -12,10 +12,10 @@ use App\Data\Common\Product\ProductDao;
 use App\Database\RelationalModel\MySql\MySqlConnectionException;
 use App\Database\RelationalModel\MySql\MySqlPdoConnection;
 use App\Database\RelationalModel\MySql\Relation\BaseDao;
-use App\Domain\Model\Product\AccessorBasedProductBuilder;
 use App\Domain\Model\Product\IdProductAttributeSet;
 use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductAttributeNames;
+use App\Domain\Model\Product\ProductRecord;
 use App\Extension\ProductSerializableDecorator;
 use Exception;
 use PDO;
@@ -111,7 +111,6 @@ class MySqlProductDao extends BaseDao implements ProductDao {
     public function fetchAll(int $page, int $limit): array {
         $products = [];
         $offsetRows = $page * $limit;
-        $builder = new AccessorBasedProductBuilder();
         $conn = $this->getConnection();
         $ps = $conn->prepare(MySqlProductRelationSql::FETCH_ALL_PRODUCTS_BY_PAGE_SQL);
 
@@ -124,7 +123,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         }
 
         while (($row = $ps->fetch(PDO::FETCH_ASSOC))) {
-            $products[] = $this->newProductInstance($row, $builder);
+            $products[] = $this->newProductInstance($row);
         }
         return $products;
     }
@@ -167,23 +166,15 @@ class MySqlProductDao extends BaseDao implements ProductDao {
 
     /**
      * @param array                            $row
-     * @param AccessorBasedProductBuilder|null $reusableBuilder
      *
      * @return Product
      * @throws Exception
      */
-    private function newProductInstance(
-        array $row,
-        ?AccessorBasedProductBuilder $reusableBuilder = null
-    ): Product {
-        $builder = ($reusableBuilder === null)
-            ? new AccessorBasedProductBuilder()
-            : $reusableBuilder;
+    private function newProductInstance(array $row,): Product {
         $accessor = new ArrayBasedProductAccessor($row);
         $product = null;
 
-        $builder->set($accessor);
-        $product = $builder->build();
+        $product = ProductRecord::of($accessor);
 
         if ($this->shallUseSerializableRecord()) {
             $product = new ProductSerializableDecorator($product);
