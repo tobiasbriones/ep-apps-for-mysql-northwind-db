@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Http\Api\Api\V1\Products;
+namespace App\Http\Api\V1\Products;
 
 use App\Config\Database\AppDatabaseConfig;
 use App\Config\Env;

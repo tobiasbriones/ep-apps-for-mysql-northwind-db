@@ -9,8 +9,8 @@
 namespace App;
 
 use App\Config\Http\AppApiDependencyConfig;
-use App\Http\Api\Api\V1\Products\ProductsController;
 use App\Http\Api\ApiDependencyConfig;
+use App\Http\Api\V1\Products\ProductsController;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Request;
