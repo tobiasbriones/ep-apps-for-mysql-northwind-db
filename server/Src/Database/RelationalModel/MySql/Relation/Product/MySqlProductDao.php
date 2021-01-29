@@ -16,7 +16,6 @@ use App\Domain\Model\Product\IdProductAttributeSet;
 use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductAttributeNames;
 use App\Domain\Model\Product\ProductRecord;
-use App\Extension\ProductSerializableDecorator;
 use Exception;
 use PDO;
 use PDOStatement;
@@ -174,12 +173,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $accessor = new ArrayBasedProductAccessor($row);
         $product = null;
 
-        $product = ProductRecord::of($accessor);
-
-        if ($this->shallUseSerializableRecord()) {
-            $product = new ProductSerializableDecorator($product);
-        }
-        return $product;
+        return ProductRecord::of($accessor);
     }
 
 }
