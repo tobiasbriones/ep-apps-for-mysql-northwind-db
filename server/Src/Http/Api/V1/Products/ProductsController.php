@@ -8,7 +8,10 @@
 
 namespace App\Http\Api\V1\Products;
 
+use App\Config\Database\AppDatabaseConfig;
 use App\Config\Env;
+use App\Database\Factory\ConnectionFactory;
+use App\Database\Factory\ProductDaoFactory;
 use App\Database\RelationalModel\MySql\MySqlPdoConnection;
 use App\Database\RelationalModel\MySql\Relation\Product\MySqlProductDao;
 use App\Database\RelationalModel\PdoParams;
@@ -67,15 +70,17 @@ class ProductsController {
 
     public static function get(): callable {
         return function (Request $req, Response $res, array $args): Response {
+            // NOTE: When this app works as just an API I don't need the
+            // repository pattern. Instead, create a Mapper to transform the
+            // data retrieved from the DAO to a domain record.
+            // The mapper can be also gotten from a framework or ORM but that's
+            // not the point of this app
+            // By using this approach I think this may be quite useful for
+            // a microservice architecture
             try {
-                $params = new PdoParams(
-                    Env::get(Env::DB_HOST_KEY),
-                    Env::get(Env::DB_NAME_KEY),
-                    Env::get(Env::DB_ROOT_USERNAME_KEY),
-                    Env::get(Env::DB_ROOT_PASSWORD_KEY)
-                );
-                $conn = MySqlPdoConnection::newInstance($params);
-                $productDao = new MySqlProductDao($conn);
+                $dbConfig = new AppDatabaseConfig();
+                $conn = ConnectionFactory::newConnection($dbConfig);
+                $productDao = ProductDaoFactory::newProductDao($conn);
                 $productRepository = new AppProductRepository($productDao);
                 $product = $productRepository->get($args["id"]);
 
