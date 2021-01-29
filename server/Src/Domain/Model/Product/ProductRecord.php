@@ -15,49 +15,21 @@ namespace App\Domain\Model\Product;
  */
 class ProductRecord implements Product {
 
-    private int $id;
-    private ?string $supplierIds;
-    private ?string $productCode;
-    private ?string $productName;
-    private ?string $description;
-    private ?float $standardCost;
-    private float $listPrice;
-    private ?int $reorderLevel;
-    private ?int $targetLevel;
-    private ?string $quantityPerUnit;
-    private ?bool $discontinued;
-    private ?int $minimumReorderQuantity;
-    private ?string $category;
-
     public function __construct(
-        int $id,
-        ?string $supplierIds,
-        ?string $productCode,
-        ?string $productName,
-        ?string $description,
-        ?float $standardCost,
-        float $listPrice,
-        ?int $reorderLevel,
-        ?int $targetLevel,
-        ?string $quantityPerUnit,
-        bool $discontinued,
-        ?int $minimumReorderQuantity,
-        ?string $category
-    ) {
-        $this->id = $id;
-        $this->supplierIds = $supplierIds;
-        $this->productCode = $productCode;
-        $this->productName = $productName;
-        $this->description = $description;
-        $this->standardCost = $standardCost;
-        $this->listPrice = $listPrice;
-        $this->reorderLevel = $reorderLevel;
-        $this->targetLevel = $targetLevel;
-        $this->quantityPerUnit = $quantityPerUnit;
-        $this->discontinued = $discontinued;
-        $this->minimumReorderQuantity = $minimumReorderQuantity;
-        $this->category = $category;
-    }
+        private int $id,
+        private ?string $supplierIds,
+        private ?string $productCode,
+        private ?string $productName,
+        private ?string $description,
+        private ?float $standardCost,
+        private float $listPrice,
+        private ?int $reorderLevel,
+        private ?int $targetLevel,
+        private ?string $quantityPerUnit,
+        private bool $discontinued,
+        private ?int $minimumReorderQuantity,
+        private ?string $category
+    ) {}
 
     public function id(): int {
         return $this->id;
