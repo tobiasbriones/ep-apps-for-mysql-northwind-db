@@ -9,6 +9,7 @@
 namespace App\Database\RelationalModel\MySql;
 
 use App\Database\RelationalModel\PdoParams;
+use App\Database\RelationalModel\RelationalConnection;
 use Exception;
 use PDO;
 
@@ -17,7 +18,7 @@ use PDO;
  *
  * @package App\Database\RelationalModel\MySql
  */
-class MySqlPdoConnection {
+class MySqlPdoConnection implements RelationalConnection {
 
     /**
      * Creates a PDO northwind database connection.
