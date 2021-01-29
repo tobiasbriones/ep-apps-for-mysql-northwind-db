@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-namespace App\Http\Api\V1\Products;
+namespace App\Http\Api\Api\V1\Products;
 
 use App\Config\Database\AppDatabaseConfig;
 use App\Config\Env;
@@ -16,6 +16,7 @@ use App\Database\Factory\ProductDaoFactory;
 use App\Database\RelationalModel\MySql\MySqlPdoConnection;
 use App\Database\RelationalModel\MySql\Relation\Product\MySqlProductDao;
 use App\Database\RelationalModel\PdoParams;
+use App\Domain\Repository\Repository;
 use App\Http\Util\RequestUtils;
 use App\Repository\AppProductRepository;
 use Exception;
@@ -30,6 +31,8 @@ class ProductsController {
     private const GET_ALL_LIMIT_PARAM_NAME = "limit";
     private const GET_ALL_LIMIT_PARAM_DEF_VALUE = 15;
     private const FORMAT_PARAM_NAME = "format";
+
+    public function __construct(private Repository $repository) {}
 
     public static function getAll(): callable {
         return function (Request $req, Response $res): Response {
@@ -72,7 +75,7 @@ class ProductsController {
 
     public static function get(): callable {
         return function (Request $req, Response $res, array $args): Response {
-            // NOTE: When this app works as just an API I don't need the
+            // NOTE: When this app works as just a CRUD API I don't need the
             // repository pattern. Instead, create a Mapper to transform the
             // data retrieved from the DAO to a domain record.
             // The mapper can be also gotten from a framework or ORM but that's

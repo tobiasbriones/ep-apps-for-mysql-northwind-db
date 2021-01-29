@@ -9,9 +9,12 @@
 namespace App;
 
 use App\Config\Http\AppApiDependencyConfig;
+use App\Http\Api\Api\V1\Products\ProductsController;
 use App\Http\Api\ApiDependencyConfig;
 use Slim\App;
 use Slim\Factory\AppFactory;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
 class Main {
 
@@ -26,7 +29,20 @@ class Main {
     }
 
     public function start() {
+        $app = $this->app;
 
+        $app->get(
+            "/",
+            function (Request $request, Response $response, $args) {
+                $response->getBody()->write("Hey!");
+                return $response;
+            }
+        );
+
+        $app->get("/api/v1/products", ProductsController::getAll());
+        $app->get("/api/v1/products/{id}", ProductsController::get());
+
+        $app->run();
     }
 
 }

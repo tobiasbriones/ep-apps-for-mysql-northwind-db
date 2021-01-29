@@ -6,24 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-use App\Http\Api\V1\Products\ProductsController;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Factory\AppFactory;
+use App\Main;
 
 require __DIR__ . "/../vendor/autoload.php";
 
-$app = AppFactory::create();
+$main = new Main();
 
-$app->get(
-    "/",
-    function (Request $request, Response $response, $args) {
-        $response->getBody()->write("Hey!");
-        return $response;
-    }
-);
-
-$app->get("/api/v1/products", ProductsController::getAll());
-$app->get("/api/v1/products/{id}", ProductsController::get());
-
-$app->run();
+$main->start();
