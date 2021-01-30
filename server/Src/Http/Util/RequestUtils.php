@@ -13,9 +13,22 @@
 
 namespace App\Http\Util;
 
+use App\Config\Http\AppSerialization;
+use App\Http\Serialization;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class RequestUtils {
+
+    private const FORMAT_PARAM_NAME = "format";
+
+    public static function getSerializationParam(Request $req): int {
+        $str = RequestUtils::getStringQueryParam(
+            $req,
+            self::FORMAT_PARAM_NAME,
+            AppSerialization::DEF_SERIALIZATION
+        );
+        return Serialization::fromString($str);
+    }
 
     public static function getIntQueryParam(
         Request $req,
@@ -32,6 +45,7 @@ class RequestUtils {
         }
         return $paramValue;
     }
+
 
     public static function getStringQueryParam(
         Request $req,
