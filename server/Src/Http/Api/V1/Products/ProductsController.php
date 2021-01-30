@@ -50,10 +50,15 @@ class ProductsController {
                     $res->getBody()->write(json_encode(["msg" => "Not found"]));
                 }
                 else {
-                    $res->getBody()->write(json_encode($products));
+                    $serialization = RequestUtils::getStringQueryParam(
+                        $req,
+                        self::FORMAT_PARAM_NAME,
+                        AppSerialization::DEF_SERIALIZATION
+                    );
+                    $res->getBody()->write(ProductSerializable::serializeAll($products, $serialization));
                 }
             }
-            catch (Exception $err) {
+            catch (Exception) {
                 $res = $res->withStatus(500);
             }
             return $res;

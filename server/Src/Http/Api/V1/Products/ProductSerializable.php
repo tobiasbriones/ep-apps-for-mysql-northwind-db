@@ -19,6 +19,32 @@ use App\Http\Serialization;
 
 class ProductSerializable {
 
+    public static function serializeAll(array $products, int $serialization): string {
+        return match ($serialization) {
+            Serialization::JSON => self::jsonSerializeAll($products),
+            Serialization::XML => self::xmlSerializeAll(),
+            Serialization::HTML => self::htmlSerializeAll(),
+        };
+    }
+
+    private static function jsonSerializeAll(array $products): string {
+        $array = [];
+
+        foreach ($products as $product) {
+            $serializable = new ProductSerializable($product);
+            $array[] = $serializable->toArray();
+        }
+        return json_encode($array);
+    }
+
+    private static function xmlSerializeAll(): string {
+        return "not supported";
+    }
+
+    private static function htmlSerializeAll(): string {
+        return "not supported";
+    }
+
     public function __construct(private Product $product) {}
 
     public function serialize(int $serialization): string {
