@@ -1,3 +1,15 @@
+/*
+ * Copyright (c) 2020 Tobias Briones. All rights reserved.
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ * This file is part of Example Project: Apps for the MySQL Northwind DB.
+ *
+ * This source code is licensed under the MIT License found in the
+ * LICENSE file in the root directory of this source tree or at
+ * https://opensource.org/licenses/MIT.
+ */
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
