@@ -1,6 +1,7 @@
 {
   "name": "example.dev.fullstack.apps-for-mysql-northwind-db",
   "version": "0.1.0",
+  "author": "Tobias Briones <tobiasbriones.dev@gmail.com>",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
