@@ -1,6 +1,6 @@
 {
-  "name": "example.dev.fullstack.web.northwinddb-mysql-app",
-  "version": "0.0.0",
+  "name": "example.dev.fullstack.apps-for-mysql-northwind-db",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
