@@ -20,6 +20,7 @@ class Main {
 
     public const APP_VERSION = "0.1.0";
     public const API_VERSION = 1;
+    public const BASE_ENDPOINT = "/api/v" . self::API_VERSION;
     private App $app;
     private ApiDependencyConfig $apiConfig;
 
@@ -28,7 +29,7 @@ class Main {
         $this->apiConfig = new AppApiDependencyConfig();
     }
 
-    public function start() {
+    public function start(): void {
         $app = $this->app;
 
         $app->get(
@@ -39,8 +40,8 @@ class Main {
             }
         );
 
-        $app->get("/api/v1/products", ProductsController::getAll());
-        $app->get("/api/v1/products/{id}", ProductsController::get());
+        $app->get(self::BASE_ENDPOINT . "/products", ProductsController::getAll());
+        $app->get(self::BASE_ENDPOINT . "/products/{id}", ProductsController::get());
 
         $app->run();
     }
