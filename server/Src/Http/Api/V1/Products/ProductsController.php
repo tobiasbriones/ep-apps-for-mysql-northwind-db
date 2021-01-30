@@ -14,7 +14,7 @@
 namespace App\Http\Api\V1\Products;
 
 use App\Config\Http\AppSerialization;
-use App\Domain\Repository\Repository;
+use App\Domain\Repository\ProductRepository;
 use App\Http\Util\RequestUtils;
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -28,35 +28,7 @@ class ProductsController {
     private const GET_ALL_LIMIT_PARAM_DEF_VALUE = 15;
     private const FORMAT_PARAM_NAME = "format";
 
-    public function __construct(private Repository $repository) {}
-
-    public function get(): callable {
-        return function (Request $req, Response $res, array $args): Response {
-            try {
-                $product = $this->repository->get($args["id"]);
-
-                if ($product === null) {
-                    $res->withStatus(404);
-                    $res->getBody()->write(json_encode(["msg" => "Not found"]));
-                }
-                else {
-                    $serialization = RequestUtils::getStringQueryParam(
-                        $req,
-                        self::FORMAT_PARAM_NAME,
-                        AppSerialization::DEF_SERIALIZATION
-                    );
-                    $serializable = new ProductSerializable($product);
-                    $enc = $serializable->serialize($serialization);
-                    $res->getBody()->write($enc);
-                }
-            }
-            catch (Exception $err) {
-                $res = $res->withStatus(500);
-                echo $err;
-            }
-            return $res;
-        };
-    }
+    public function __construct(private ProductRepository $repository) {}
 
     public function getAll(): callable {
         return function (Request $req, Response $res): Response {
@@ -83,6 +55,34 @@ class ProductsController {
             }
             catch (Exception $err) {
                 $res = $res->withStatus(500);
+            }
+            return $res;
+        };
+    }
+
+    public function get(): callable {
+        return function (Request $req, Response $res, array $args): Response {
+            try {
+                $product = $this->repository->get($args["id"]);
+
+                if ($product === null) {
+                    $res->withStatus(404);
+                    $res->getBody()->write(json_encode(["msg" => "Not found"]));
+                }
+                else {
+                    $serialization = RequestUtils::getStringQueryParam(
+                        $req,
+                        self::FORMAT_PARAM_NAME,
+                        AppSerialization::DEF_SERIALIZATION
+                    );
+                    $serializable = new ProductSerializable($product);
+                    $enc = $serializable->serialize($serialization);
+                    $res->getBody()->write($enc);
+                }
+            }
+            catch (Exception $err) {
+                $res = $res->withStatus(500);
+                echo $err;
             }
             return $res;
         };
