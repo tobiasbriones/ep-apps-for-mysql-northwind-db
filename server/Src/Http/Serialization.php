@@ -11,12 +11,12 @@
  * https://opensource.org/licenses/MIT.
  */
 
-namespace App\Database;
+namespace App\Http;
 
-// NOTE: This will be a marker interface for now. The problem is that I want to
-// support any kind of DB (SQL, NoSQL, ...) in this enterprise app so the
-// abstraction is pretty high and PHP does not have generics and I have to
-// further design this part of the app
-interface Connection {
+class Serialization {
+
+    public const JSON = 1;
+    public const XML = 2;
+    public const HTML = 3;
 
 }

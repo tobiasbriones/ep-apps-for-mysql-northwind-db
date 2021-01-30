@@ -1,9 +1,14 @@
 <?php
 /*
- * Copyright (c) 2020 Tobias Briones.
+ * Copyright (c) 2020 Tobias Briones. All rights reserved.
  *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * SPDX-License-Identifier: MIT
+ *
+ * This file is part of Example Project: Apps for the MySQL Northwind DB.
+ *
+ * This source code is licensed under the MIT License found in the
+ * LICENSE file in the root directory of this source tree or at
+ * https://opensource.org/licenses/MIT.
  */
 
 namespace App\Config;
@@ -17,17 +22,17 @@ use Exception;
  * @package App\Config
  */
 class Env {
-    
+
     public const DB_HOST_KEY = "DB_HOST_NAME";
     public const DB_NAME_KEY = "DB_NAME";
     public const DB_ROOT_USERNAME_KEY = "DB_ROOT_USERNAME";
     public const DB_ROOT_PASSWORD_KEY = "DB_ROOT_PASSWORD";
     private static bool $isLoaded = false;
-    
+
     /**
      * Returns the value of the ENV property with the specified key.
      *
-     * @param $key string the ENV key property to get
+     * @param string $key the ENV key property to get
      *
      * @return string the ENV value property from the given key
      * @throws Exception if property wasn't found or the given key is invalid
@@ -43,5 +48,5 @@ class Env {
         }
         return $_ENV[$key];
     }
-    
+
 }
