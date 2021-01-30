@@ -26,7 +26,6 @@ class ProductsController {
     private const GET_ALL_PAGE_PARAM_DEF_VALUE = 0;
     private const GET_ALL_LIMIT_PARAM_NAME = "limit";
     private const GET_ALL_LIMIT_PARAM_DEF_VALUE = 15;
-    private const FORMAT_PARAM_NAME = "format";
 
     public function __construct(private ProductRepository $repository) {}
 
@@ -50,11 +49,7 @@ class ProductsController {
                     $res->getBody()->write(json_encode(["msg" => "Not found"]));
                 }
                 else {
-                    $serialization = RequestUtils::getStringQueryParam(
-                        $req,
-                        self::FORMAT_PARAM_NAME,
-                        AppSerialization::DEF_SERIALIZATION
-                    );
+                    $serialization = RequestUtils::getSerializationParam($req);
                     $res->getBody()->write(ProductSerializable::serializeAll($products, $serialization));
                 }
             }
@@ -75,11 +70,7 @@ class ProductsController {
                     $res->getBody()->write(json_encode(["msg" => "Not found"]));
                 }
                 else {
-                    $serialization = RequestUtils::getStringQueryParam(
-                        $req,
-                        self::FORMAT_PARAM_NAME,
-                        AppSerialization::DEF_SERIALIZATION
-                    );
+                    $serialization = RequestUtils::getSerializationParam($req);
                     $serializable = new ProductSerializable($product);
                     $enc = $serializable->serialize($serialization);
                     $res->getBody()->write($enc);
