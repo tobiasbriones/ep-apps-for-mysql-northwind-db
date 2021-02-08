@@ -15,17 +15,12 @@ namespace App\Database\RelationalModel;
 
 final class PdoParams {
 
-    private string $host;
-    private string $databaseName;
-    private string $userName;
-    private string $password;
-
-    public function __construct(string $host, string $databaseName, string $userName, string $password) {
-        $this->host = $host;
-        $this->databaseName = $databaseName;
-        $this->userName = $userName;
-        $this->password = $password;
-    }
+    public function __construct(
+        private string $host,
+        private string $databaseName,
+        private string $userName,
+        private string $password
+    ) {}
 
     public function host(): string {
         return $this->host;
