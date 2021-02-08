@@ -13,7 +13,7 @@
 
 namespace App\Http\Api;
 
-use App\Http\Api\V1\Products\ProductsController;
+use App\Http\Api\V1\Products\ProductsRoute;
 use App\Main;
 use Slim\App;
 use Slim\Psr7\Request;
@@ -26,7 +26,7 @@ final class Routes {
     public function __construct(private ApiDependencyConfig $config) {}
 
     public function init(App $app): void {
-        $productsController = new ProductsController($this->config->productRepository());
+        $productsRoute = new ProductsRoute($this->config->productRepository());
 
         $app->get(
             "/",
@@ -36,8 +36,8 @@ final class Routes {
             }
         );
 
-        $app->get(self::BASE_ENDPOINT . "/products", $productsController->getAll());
-        $app->get(self::BASE_ENDPOINT . "/products/{id}", $productsController->get());
+        $app->get(self::BASE_ENDPOINT . "/products", $productsRoute->onGetAll());
+        $app->get(self::BASE_ENDPOINT . "/products/{id}", $productsRoute->onGet());
     }
 
 }
