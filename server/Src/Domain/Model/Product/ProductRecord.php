@@ -13,30 +13,14 @@
 
 namespace App\Domain\Model\Product;
 
+use Exception;
+
 /**
- * Provides the implementation of the Product model.
+ * Defines the Product attributes.
  *
  * @package App\Domain\Model\Product
  */
-class ProductRecord implements Product {
-
-    public static function of(ProductAccessor $accessor): Product {
-        return new ProductRecord(
-            $accessor->getId(),
-            $accessor->getSupplierIds(),
-            $accessor->getCode(),
-            $accessor->getName(),
-            $accessor->getDescription(),
-            $accessor->getStandardCost(),
-            $accessor->getListPrice(),
-            $accessor->getReorderLevel(),
-            $accessor->getTargetLevel(),
-            $accessor->getQuantityPerUnit(),
-            $accessor->getDiscontinued(),
-            $accessor->getMinimumReorderQuantity(),
-            $accessor->getCategory()
-        );
-    }
+class ProductRecord extends ProductId {
 
     public function __construct(
         private int $id,
@@ -52,10 +36,9 @@ class ProductRecord implements Product {
         private bool $discontinued,
         private ?int $minimumReorderQuantity,
         private ?string $category
-    ) {}
-
-    public function id(): int {
-        return $this->id;
+    ) {
+        parent::__construct($id);
+        $this->validate();
     }
 
     public function productCode(): ?string {
@@ -104,6 +87,27 @@ class ProductRecord implements Product {
 
     public function category(): ?string {
         return $this->category;
+    }
+
+    /**
+     * @throws Exception if the state is invalid
+     */
+    private function validate(): void {
+        if ($this->standardCost < 0) {
+            throw new Exception("Invalid standard cost: $this->standardCost");
+        }
+        if ($this->listPrice < 0) {
+            throw new Exception("Invalid standard list price: $this->standardCost");
+        }
+        if ($this->reorderLevel < 0) {
+            throw new Exception("Invalid standard reorder level: $this->standardCost");
+        }
+        if ($this->targetLevel < 0) {
+            throw new Exception("Invalid target level: $this->standardCost");
+        }
+        if ($this->minimumReorderQuantity < 0) {
+            throw new Exception("Invalid minimum reorder quantity: $this->standardCost");
+        }
     }
 
 }

@@ -13,15 +13,37 @@
 
 namespace App\Domain\Model\Product;
 
-class ProductId implements IdProductAttributeSet {
+use Exception;
 
-    private int $id;
+/**
+ * Defines the main set of the Product Attributes that identify a Product.
+ *
+ * @package App\Domain\Model\Product
+ */
+class ProductId {
 
-    public function __construct(int $id) {
-        $this->id = $id;
+    /**
+     * @param int $id id to validate
+     *
+     * @throws Exception if the id is invalid
+     */
+    private static function validate(int $id): void {
+        if ($id < 0) {
+            $msg = "Invalid id: $id. The id is a non-negative integer number";
+            throw new Exception($msg);
+        }
     }
 
-    public function id(): int {
+    /**
+     * @param int $id id value to build
+     *
+     * @throws Exception if the id is invalid
+     */
+    public function __construct(private int $id) {
+        ProductId::validate($id);
+    }
+
+    public final function id(): int {
         return $this->id;
     }
 
