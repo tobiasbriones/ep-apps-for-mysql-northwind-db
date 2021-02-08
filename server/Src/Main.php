@@ -20,7 +20,7 @@ use Exception;
 use Slim\App;
 use Slim\Factory\AppFactory;
 
-class Main {
+final class Main {
 
     public const APP_VERSION = "0.1.0";
     public const API_VERSION = 1;

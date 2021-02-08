@@ -19,7 +19,7 @@ use Slim\App;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 
-class Routes {
+final class Routes {
 
     public const BASE_ENDPOINT = "/api/v" . Main::API_VERSION;
 

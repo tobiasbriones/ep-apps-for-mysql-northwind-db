@@ -25,7 +25,7 @@ use Exception;
  *
  * @package App\Repository
  */
-class AppProductRepository implements ProductRepository {
+final class AppProductRepository implements ProductRepository {
 
     private ProductDao $productDao;
 

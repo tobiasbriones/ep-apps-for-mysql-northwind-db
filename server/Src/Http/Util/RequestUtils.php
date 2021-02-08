@@ -17,7 +17,7 @@ use App\Config\Http\AppSerialization;
 use App\Http\Serialization;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class RequestUtils {
+final class RequestUtils {
 
     private const FORMAT_PARAM_NAME = "format";
 

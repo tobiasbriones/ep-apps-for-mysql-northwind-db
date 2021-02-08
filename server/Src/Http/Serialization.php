@@ -13,7 +13,7 @@
 
 namespace App\Http;
 
-class Serialization {
+final class Serialization {
 
     public const JSON = 1;
     public const XML = 2;

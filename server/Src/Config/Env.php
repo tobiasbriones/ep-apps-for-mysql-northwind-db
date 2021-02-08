@@ -21,7 +21,7 @@ use Exception;
  *
  * @package App\Config
  */
-class Env {
+final class Env {
 
     public const DB_HOST_KEY = "DB_HOST_NAME";
     public const DB_NAME_KEY = "DB_NAME";

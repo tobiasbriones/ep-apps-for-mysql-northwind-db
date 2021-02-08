@@ -13,7 +13,7 @@
 
 namespace App\Domain\Model\Product;
 
-class ProductAttributeNames {
+final class ProductAttributeNames {
 
     public const ID = "id";
     public const CODE = "product_code";

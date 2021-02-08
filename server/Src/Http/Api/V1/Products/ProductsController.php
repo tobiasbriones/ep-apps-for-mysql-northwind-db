@@ -13,14 +13,13 @@
 
 namespace App\Http\Api\V1\Products;
 
-use App\Config\Http\AppSerialization;
 use App\Domain\Repository\ProductRepository;
 use App\Http\Util\RequestUtils;
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class ProductsController {
+final class ProductsController {
 
     private const GET_ALL_PAGE_PARAM_NAME = "page";
     private const GET_ALL_PAGE_PARAM_DEF_VALUE = 0;
@@ -50,7 +49,9 @@ class ProductsController {
                 }
                 else {
                     $serialization = RequestUtils::getSerializationParam($req);
-                    $res->getBody()->write(ProductSerializable::serializeAll($products, $serialization));
+                    $res->getBody()->write(
+                        ProductSerializable::serializeAll($products, $serialization)
+                    );
                 }
             }
             catch (Exception) {

@@ -24,7 +24,7 @@ use Exception;
 use PDO;
 use PDOStatement;
 
-class MySqlProductDao extends BaseDao implements ProductDao {
+final class MySqlProductDao extends BaseDao implements ProductDao {
 
     private static function bindAllParams(Product $product, PDOStatement $ps): void {
         $code = $product->productCode();

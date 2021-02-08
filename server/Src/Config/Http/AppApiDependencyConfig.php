@@ -22,7 +22,7 @@ use App\Http\Api\ApiDependencyConfig;
 use App\Repository\AppProductRepository;
 use Exception;
 
-class AppApiDependencyConfig implements ApiDependencyConfig {
+final class AppApiDependencyConfig implements ApiDependencyConfig {
 
     private AppDatabaseConfig $databaseConfig;
     private ProductRepository $productRepository;

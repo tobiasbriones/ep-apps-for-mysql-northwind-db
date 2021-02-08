@@ -13,7 +13,7 @@
 
 namespace App\Database\RelationalModel;
 
-class PdoParams {
+final class PdoParams {
 
     private string $host;
     private string $databaseName;

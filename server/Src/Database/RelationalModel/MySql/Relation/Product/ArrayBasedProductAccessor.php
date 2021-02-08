@@ -16,7 +16,7 @@ namespace App\Database\RelationalModel\MySql\Relation\Product;
 use App\Domain\Model\Product\ProductAccessor;
 use App\Domain\Model\Product\ProductAttributeNames;
 
-class ArrayBasedProductAccessor implements ProductAccessor {
+final class ArrayBasedProductAccessor implements ProductAccessor {
 
     private array $productArray;
 

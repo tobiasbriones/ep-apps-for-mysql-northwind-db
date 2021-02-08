@@ -21,7 +21,7 @@ use App\Database\RelationalModel\RelationalConnection;
 
 // NOTE: Need to define the AbstractDaoFactory but manage the fact that PHP
 // does not have generics
-class ProductDaoFactory {
+final class ProductDaoFactory {
 
     public static function newProductDao(Connection $connection): ?ProductDao {
         if ($connection instanceof RelationalConnection) {

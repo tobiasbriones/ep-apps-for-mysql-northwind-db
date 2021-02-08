@@ -17,7 +17,7 @@ use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductAttributeNames;
 use App\Http\Serialization;
 
-class ProductSerializable {
+final class ProductSerializable {
 
     public static function serializeAll(array $products, int $serialization): string {
         return match ($serialization) {
