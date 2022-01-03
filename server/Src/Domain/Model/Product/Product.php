@@ -13,9 +13,37 @@
 
 namespace App\Domain\Model\Product;
 
+use Exception;
+
 /**
  * Defines the Product model from the Northwind Database Schema.
  *
  * @package App\Domain\Model\Product
  */
-interface Product extends ProductAttributeSet {}
+final class Product extends ProductRecord {
+
+    /**
+     * @param ProductAccessor $accessor
+     *
+     * @return Product
+     * @throws Exception if the given product is invalid
+     */
+    public static function of(ProductAccessor $accessor): Product {
+        return new Product(
+            $accessor->getId(),
+            $accessor->getSupplierIds(),
+            $accessor->getCode(),
+            $accessor->getName(),
+            $accessor->getDescription(),
+            $accessor->getStandardCost(),
+            $accessor->getListPrice(),
+            $accessor->getReorderLevel(),
+            $accessor->getTargetLevel(),
+            $accessor->getQuantityPerUnit(),
+            $accessor->getDiscontinued(),
+            $accessor->getMinimumReorderQuantity(),
+            $accessor->getCategory()
+        );
+    }
+
+}

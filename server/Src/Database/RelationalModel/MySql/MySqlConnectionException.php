@@ -15,7 +15,7 @@ namespace App\Database\RelationalModel\MySql;
 
 use Exception;
 
-class MySqlConnectionException extends Exception {
+final class MySqlConnectionException extends Exception {
 
     public function __construct(string $message = "") {
         parent::__construct($message);

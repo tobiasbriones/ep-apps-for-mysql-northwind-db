@@ -16,7 +16,7 @@ namespace App\Repository;
 use App\Data\Common\Product\ProductDao;
 use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductId;
-use App\Domain\Repository\Repository;
+use App\Domain\Repository\ProductRepository;
 use Exception;
 
 /**
@@ -25,7 +25,7 @@ use Exception;
  *
  * @package App\Repository
  */
-class AppProductRepository implements Repository {
+final class AppProductRepository implements ProductRepository {
 
     private ProductDao $productDao;
 

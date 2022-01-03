@@ -15,7 +15,7 @@ namespace App\Config\Http;
 
 use App\Http\Serialization;
 
-class AppSerialization {
+final class AppSerialization {
 
     public const DEF_SERIALIZATION = Serialization::JSON;
 

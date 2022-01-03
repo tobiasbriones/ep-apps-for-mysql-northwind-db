@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2020 Tobias Briones. All rights reserved.
+ * Copyright (c) 2021 Tobias Briones. All rights reserved.
  *
  * SPDX-License-Identifier: MIT
  *
@@ -11,15 +11,6 @@
  * https://opensource.org/licenses/MIT.
  */
 
-namespace App\Domain\Model\Product;
+namespace App\Domain\Repository;
 
-/**
- * Defines the main set of the Product Attributes that identify a Product.
- *
- * @package App\Domain\Model\Product
- */
-interface IdProductAttributeSet {
-
-    public function id(): int;
-
-}
+interface ProductRepository extends Repository {}

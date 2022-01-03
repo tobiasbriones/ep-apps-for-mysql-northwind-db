@@ -16,15 +16,16 @@ namespace App\Config\Http;
 use App\Config\Database\AppDatabaseConfig;
 use App\Database\Factory\ConnectionFactory;
 use App\Database\Factory\ProductDaoFactory;
+use App\Domain\Repository\ProductRepository;
 use App\Domain\Repository\Repository;
 use App\Http\Api\ApiDependencyConfig;
 use App\Repository\AppProductRepository;
 use Exception;
 
-class AppApiDependencyConfig implements ApiDependencyConfig {
+final class AppApiDependencyConfig implements ApiDependencyConfig {
 
     private AppDatabaseConfig $databaseConfig;
-    private Repository $productRepository;
+    private ProductRepository $productRepository;
 
     public function __construct() {
         $this->databaseConfig = new AppDatabaseConfig();
@@ -39,7 +40,7 @@ class AppApiDependencyConfig implements ApiDependencyConfig {
         $this->productRepository = new AppProductRepository($productDao);
     }
 
-    public function productRepository(): Repository {
+    public function productRepository(): ProductRepository {
         return $this->productRepository;
     }
 
