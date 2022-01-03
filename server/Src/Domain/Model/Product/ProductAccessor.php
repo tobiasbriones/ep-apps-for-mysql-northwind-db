@@ -14,7 +14,7 @@
 namespace App\Domain\Model\Product;
 
 /**
- * Defines the Product Accessor from the Product model.
+ * Defines the Product Accessor from the Product record.
  *
  * @package App\Domain\Model\Product
  * @see     Product

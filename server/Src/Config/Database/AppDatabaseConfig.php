@@ -18,7 +18,7 @@ use App\Database\RelationalModel\PdoParams;
 use App\Database\RelationalModel\RelationalDatabaseConfig;
 use App\Database\RelationalModel\RelationalDatabaseProvider;
 
-class AppDatabaseConfig implements RelationalDatabaseConfig {
+final class AppDatabaseConfig implements RelationalDatabaseConfig {
 
     private const DB_CONFIG = RelationalDatabaseProvider::MYSQL_DB;
     private PdoParams $pdoParams;

@@ -17,7 +17,33 @@ use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductAttributeNames;
 use App\Http\Serialization;
 
-class ProductSerializable {
+final class ProductSerializable {
+
+    public static function serializeAll(array $products, int $serialization): string {
+        return match ($serialization) {
+            Serialization::JSON => self::jsonSerializeAll($products),
+            Serialization::XML => self::xmlSerializeAll(),
+            Serialization::HTML => self::htmlSerializeAll(),
+        };
+    }
+
+    private static function jsonSerializeAll(array $products): string {
+        $array = [];
+
+        foreach ($products as $product) {
+            $serializable = new ProductSerializable($product);
+            $array[] = $serializable->toArray();
+        }
+        return json_encode($array);
+    }
+
+    private static function xmlSerializeAll(): string {
+        return "not supported";
+    }
+
+    private static function htmlSerializeAll(): string {
+        return "not supported";
+    }
 
     public function __construct(private Product $product) {}
 
@@ -45,20 +71,20 @@ class ProductSerializable {
     private function toArray(): array {
         $self = $this->product;
         return [
-            ProductAttributeNames::ID_ATTR_NAME => $self->id(),
-            ProductAttributeNames::SUPPLIER_IDS_ATTR_NAME => $self->supplierIds(),
-            ProductAttributeNames::CODE_ATTR_NAME => $self->productCode(),
-            ProductAttributeNames::NAME_ATTR_NAME => $self->productName(),
-            ProductAttributeNames::DESCRIPTION_ATTR_NAME => $self->description(),
-            ProductAttributeNames::STANDARD_COST_ATTR_NAME => $self->standardCost(),
-            ProductAttributeNames::LIST_PRICE_ATTR_NAME => $self->listPrice(),
-            ProductAttributeNames::REORDER_LEVEL_ATTR_NAME => $self->reorderLevel(),
-            ProductAttributeNames::TARGET_LEVEL_ATTR_NAME => $self->targetLevel(),
-            ProductAttributeNames::QUANTITY_PER_UNIT_ATTR_NAME => $self->quantityPerUnit(),
-            ProductAttributeNames::DISCONTINUED_ATTR_NAME => $self->discontinued(),
-            ProductAttributeNames::MINIMUM_REORDER_QUANTITY_ATTR_NAME => $self->minimumReorderQuantity(
+            ProductAttributeNames::ID => $self->id(),
+            ProductAttributeNames::SUPPLIER_IDS => $self->supplierIds(),
+            ProductAttributeNames::CODE => $self->productCode(),
+            ProductAttributeNames::NAME => $self->productName(),
+            ProductAttributeNames::DESCRIPTION => $self->description(),
+            ProductAttributeNames::STANDARD_COST => $self->standardCost(),
+            ProductAttributeNames::LIST_PRICE => $self->listPrice(),
+            ProductAttributeNames::REORDER_LEVEL => $self->reorderLevel(),
+            ProductAttributeNames::TARGET_LEVEL => $self->targetLevel(),
+            ProductAttributeNames::QUANTITY_PER_UNIT => $self->quantityPerUnit(),
+            ProductAttributeNames::DISCONTINUED => $self->discontinued(),
+            ProductAttributeNames::MINIMUM_REORDER_QUANTITY => $self->minimumReorderQuantity(
             ),
-            ProductAttributeNames::CATEGORY_ATTR_NAME => $self->category()
+            ProductAttributeNames::CATEGORY => $self->category()
         ];
     }
 

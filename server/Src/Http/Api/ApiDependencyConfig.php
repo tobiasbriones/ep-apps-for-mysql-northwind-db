@@ -13,10 +13,10 @@
 
 namespace App\Http\Api;
 
-use App\Domain\Repository\Repository;
+use App\Domain\Repository\ProductRepository;
 
 interface ApiDependencyConfig {
 
-    public function productRepository(): Repository;
+    public function productRepository(): ProductRepository;
 
 }

@@ -20,7 +20,7 @@ use App\Database\RelationalModel\RelationalDatabaseConfig;
 use App\Database\RelationalModel\RelationalDatabaseProvider;
 use Exception;
 
-class ConnectionFactory {
+final class ConnectionFactory {
 
     /**
      * @param DatabaseConfig $config

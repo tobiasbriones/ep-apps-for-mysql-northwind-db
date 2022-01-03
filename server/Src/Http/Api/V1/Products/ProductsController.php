@@ -13,79 +13,54 @@
 
 namespace App\Http\Api\V1\Products;
 
-use App\Config\Http\AppSerialization;
-use App\Domain\Repository\Repository;
-use App\Http\Util\RequestUtils;
+use App\Domain\Model\Product\ProductId;
+use App\Domain\Repository\ProductRepository;
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
-class ProductsController {
+final class ProductsController {
 
-    private const GET_ALL_PAGE_PARAM_NAME = "page";
-    private const GET_ALL_PAGE_PARAM_DEF_VALUE = 0;
-    private const GET_ALL_LIMIT_PARAM_NAME = "limit";
-    private const GET_ALL_LIMIT_PARAM_DEF_VALUE = 15;
-    private const FORMAT_PARAM_NAME = "format";
+    public function __construct(private ProductRepository $repository) {}
 
-    public function __construct(private Repository $repository) {}
+    public function getAll(int $page, int $limit, int $serialization, Response $res): Response {
+        try {
+            $products = $this->repository->getAll($page, $limit);
 
-    public function get(): callable {
-        return function (Request $req, Response $res, array $args): Response {
-            try {
-                $product = $this->repository->get($args["id"]);
-
-                if ($product === null) {
-                    $res->withStatus(404);
-                    $res->getBody()->write(json_encode(["msg" => "Not found"]));
-                }
-                else {
-                    $serialization = RequestUtils::getStringQueryParam(
-                        $req,
-                        self::FORMAT_PARAM_NAME,
-                        AppSerialization::DEF_SERIALIZATION
-                    );
-                    $serializable = new ProductSerializable($product);
-                    $enc = $serializable->serialize($serialization);
-                    $res->getBody()->write($enc);
-                }
+            if (sizeof($products) === 0) {
+                $res->withStatus(404);
+                $res->getBody()->write(json_encode(["msg" => "Not found"]));
             }
-            catch (Exception $err) {
-                $res = $res->withStatus(500);
-                echo $err;
+            else {
+                $res->getBody()->write(
+                    ProductSerializable::serializeAll($products, $serialization)
+                );
             }
-            return $res;
-        };
+        }
+        catch (Exception) {
+            $res = $res->withStatus(500);
+        }
+        return $res;
     }
 
-    public function getAll(): callable {
-        return function (Request $req, Response $res): Response {
-            try {
-                $page = RequestUtils::getIntQueryParam(
-                    $req,
-                    self::GET_ALL_PAGE_PARAM_NAME,
-                    self::GET_ALL_PAGE_PARAM_DEF_VALUE
-                );
-                $limit = RequestUtils::getIntQueryParam(
-                    $req,
-                    self::GET_ALL_LIMIT_PARAM_NAME,
-                    self::GET_ALL_LIMIT_PARAM_DEF_VALUE
-                );
-                $products = $this->repository->getAll($page, $limit);
+    public function get(ProductId $id, int $serialization, Response $res): Response {
+        try {
+            $product = $this->repository->get($id->id());
 
-                if (sizeof($products) === 0) {
-                    $res->withStatus(404);
-                    $res->getBody()->write(json_encode(["msg" => "Not found"]));
-                }
-                else {
-                    $res->getBody()->write(json_encode($products));
-                }
+            if ($product === null) {
+                $res->withStatus(404);
+                $res->getBody()->write(json_encode(["msg" => "Not found"]));
             }
-            catch (Exception $err) {
-                $res = $res->withStatus(500);
+            else {
+                $serializable = new ProductSerializable($product);
+                $enc = $serializable->serialize($serialization);
+                $res->getBody()->write($enc);
             }
-            return $res;
-        };
+        }
+        catch (Exception $err) {
+            $res = $res->withStatus(500);
+            echo $err;
+        }
+        return $res;
     }
 
 }

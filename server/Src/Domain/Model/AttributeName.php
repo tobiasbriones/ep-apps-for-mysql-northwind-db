@@ -88,16 +88,11 @@ class AttributeName {
     }
 
     public final function toCase(int $case) {
-        switch ($case) {
-            case self::PASCAL_CASE_FORMAT:
-                return $this->toPascalCase();
-            case self::CAMEL_CASE_FORMAT:
-                return $this->toCamelCase();
-            case self::DEFAULT_FORMAT:
-            case self::LOWER_SNAKE_CASE_FORMAT:
-            default:
-                return $this->value();
-        }
+        return match ($case) {
+            self::PASCAL_CASE_FORMAT => $this->toPascalCase(),
+            self::CAMEL_CASE_FORMAT => $this->toCamelCase(),
+            default => $this->value(),
+        };
     }
 
 }

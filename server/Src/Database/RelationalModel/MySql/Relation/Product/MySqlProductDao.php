@@ -17,15 +17,14 @@ use App\Data\Common\Product\ProductDao;
 use App\Database\RelationalModel\MySql\MySqlConnectionException;
 use App\Database\RelationalModel\MySql\MySqlPdoConnection;
 use App\Database\RelationalModel\MySql\Relation\BaseDao;
-use App\Domain\Model\Product\IdProductAttributeSet;
+use App\Domain\Model\Product\ProductId;
 use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductAttributeNames;
-use App\Domain\Model\Product\ProductRecord;
 use Exception;
 use PDO;
 use PDOStatement;
 
-class MySqlProductDao extends BaseDao implements ProductDao {
+final class MySqlProductDao extends BaseDao implements ProductDao {
 
     private static function bindAllParams(Product $product, PDOStatement $ps): void {
         $code = $product->productCode();
@@ -41,21 +40,21 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $minimumReorderQuantity = $product->minimumReorderQuantity();
         $category = $product->category();
 
-        $ps->bindParam(ProductAttributeNames::CODE_ATTR_NAME, $code);
-        $ps->bindParam(ProductAttributeNames::SUPPLIER_IDS_ATTR_NAME, $supplierIds);
-        $ps->bindParam(ProductAttributeNames::NAME_ATTR_NAME, $name);
-        $ps->bindParam(ProductAttributeNames::DESCRIPTION_ATTR_NAME, $description);
-        $ps->bindParam(ProductAttributeNames::STANDARD_COST_ATTR_NAME, $standardCost);
-        $ps->bindParam(ProductAttributeNames::LIST_PRICE_ATTR_NAME, $listPrice);
-        $ps->bindParam(ProductAttributeNames::REORDER_LEVEL_ATTR_NAME, $reorderLevel);
-        $ps->bindParam(ProductAttributeNames::TARGET_LEVEL_ATTR_NAME, $targetLevel);
-        $ps->bindParam(ProductAttributeNames::QUANTITY_PER_UNIT_ATTR_NAME, $quantityPerUnit);
-        $ps->bindParam(ProductAttributeNames::DISCONTINUED_ATTR_NAME, $discontinued);
+        $ps->bindParam(ProductAttributeNames::CODE, $code);
+        $ps->bindParam(ProductAttributeNames::SUPPLIER_IDS, $supplierIds);
+        $ps->bindParam(ProductAttributeNames::NAME, $name);
+        $ps->bindParam(ProductAttributeNames::DESCRIPTION, $description);
+        $ps->bindParam(ProductAttributeNames::STANDARD_COST, $standardCost);
+        $ps->bindParam(ProductAttributeNames::LIST_PRICE, $listPrice);
+        $ps->bindParam(ProductAttributeNames::REORDER_LEVEL, $reorderLevel);
+        $ps->bindParam(ProductAttributeNames::TARGET_LEVEL, $targetLevel);
+        $ps->bindParam(ProductAttributeNames::QUANTITY_PER_UNIT, $quantityPerUnit);
+        $ps->bindParam(ProductAttributeNames::DISCONTINUED, $discontinued);
         $ps->bindParam(
-            ProductAttributeNames::MINIMUM_REORDER_QUANTITY_ATTR_NAME,
+            ProductAttributeNames::MINIMUM_REORDER_QUANTITY,
             $minimumReorderQuantity
         );
-        $ps->bindParam(ProductAttributeNames::CATEGORY_ATTR_NAME, $category);
+        $ps->bindParam(ProductAttributeNames::CATEGORY, $category);
     }
 
 
@@ -82,17 +81,17 @@ class MySqlProductDao extends BaseDao implements ProductDao {
     }
 
     /**
-     * @param IdProductAttributeSet $id product to fetch
+     * @param ProductId $id product to fetch
      *
      * @return Product|null
      * @throws MySqlConnectionException|Exception if something fails
      */
-    public function fetch(IdProductAttributeSet $id): ?Product {
+    public function fetch(ProductId $id): ?Product {
         $conn = $this->getConnection();
         $id = $id->id();
         $ps = $conn->prepare(MySqlProductRelationSql::FETCH_PRODUCT_SQL);
 
-        $ps->bindParam(ProductAttributeNames::ID_ATTR_NAME, $id);
+        $ps->bindParam(ProductAttributeNames::ID, $id);
         if (!$ps->execute()) {
             $msg = "Fail to fetch product: $id";
             throw new MySqlConnectionException($msg);
@@ -143,7 +142,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $ps = $conn->prepare(MySqlProductRelationSql::UPDATE_PRODUCT_SQL);
 
         self::bindAllParams($product, $ps);
-        $ps->bindParam(ProductAttributeNames::ID_ATTR_NAME, $id);
+        $ps->bindParam(ProductAttributeNames::ID, $id);
 
         if (!$ps->execute()) {
             $msg = "Fail to update product: $product";
@@ -161,7 +160,7 @@ class MySqlProductDao extends BaseDao implements ProductDao {
         $id = $product->id();
         $ps = $conn->prepare(MySqlProductRelationSql::DELETE_PRODUCT_SQL);
 
-        $ps->bindParam(ProductAttributeNames::ID_ATTR_NAME, $id);
+        $ps->bindParam(ProductAttributeNames::ID, $id);
         if (!$ps->execute()) {
             $msg = "Fail to delete product: $product";
             throw new MySqlConnectionException($msg);
@@ -174,11 +173,11 @@ class MySqlProductDao extends BaseDao implements ProductDao {
      * @return Product
      * @throws Exception
      */
-    private function newProductInstance(array $row,): Product {
+    private function newProductInstance(array $row): Product {
         $accessor = new ArrayBasedProductAccessor($row);
         $product = null;
 
-        return ProductRecord::of($accessor);
+        return Product::of($accessor);
     }
 
 }

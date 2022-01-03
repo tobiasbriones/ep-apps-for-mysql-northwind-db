@@ -23,7 +23,7 @@ use PDO;
  *
  * @package App\Database\RelationalModel\MySql
  */
-class MySqlPdoConnection implements RelationalConnection {
+final class MySqlPdoConnection implements RelationalConnection {
 
     /**
      * Creates a PDO northwind database connection.

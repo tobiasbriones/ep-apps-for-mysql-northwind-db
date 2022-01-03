@@ -14,7 +14,7 @@
 namespace App\Database\RelationalModel;
 
 // Required if multiple DB implementations are supported
-class RelationalDatabaseProvider {
+final class RelationalDatabaseProvider {
 
     public const MYSQL_DB = 1;
 

@@ -18,7 +18,7 @@ namespace App\Database\RelationalModel\MySql\Relation\Product;
  *
  * @package App\Database\RelationalModel\MySql\Relation\Product
  */
-class MySqlProductRelationSql {
+final class MySqlProductRelationSql {
 
     /**
      * SQL query to insert a new product.

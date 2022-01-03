@@ -13,10 +13,18 @@
 
 namespace App\Http;
 
-class Serialization {
+final class Serialization {
 
     public const JSON = 1;
     public const XML = 2;
     public const HTML = 3;
+
+    public static function fromString(string $format): int {
+        return match($format) {
+            default => self::JSON,
+            "xml", "XML" => self::XML,
+            "html", "HTML" => self::HTML
+        };
+    }
 
 }
